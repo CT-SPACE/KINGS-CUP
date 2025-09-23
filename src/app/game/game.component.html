@@ -1,0 +1,16 @@
+<div class="field" [ngClass]="{ 'expand': isExpanded }">
+<div class="card-stack">
+    <div class="cardback"  [ngStyle]="{'right.px':i*5}" *ngFor="let c of [1,2,3,4,5]; let i = index;" >
+        <img src="./../assets/img/cardback.png">
+    </div>
+      <div class="cardback topCard pick" (click)="takeCard()">
+        <!-- <img src="./../assets/img/cardback.png">   -->
+         <app-cards></app-cards>
+        
+        </div>
+        
+    </div>
+  
+</div>
+
+

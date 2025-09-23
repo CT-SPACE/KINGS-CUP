@@ -1,0 +1,76 @@
+@import "./../../../styles.scss";
+
+.card-frame{
+    height:100%;
+}
+.card-content {
+  background-color: rgb(255, 255, 240);
+  display: flex;
+  align-items: center;
+
+  border-radius: 20px;
+  flex-direction: column;
+  padding: 20px;
+  outline-offset: -30px;
+//   outline-color: #8b13a0;
+  outline-style: solid;
+  outline-width: 1px;
+  gap: 1rem;
+//   color: #8b13a0;
+  width: 100%;
+  height: 100%;
+
+  > div {
+    // border: 1px solid yellowgreen;
+    position: absolute;
+  }
+  > .card-short {
+    font-size: 3rem;
+    padding: 0 10px;
+    height: fit-content;
+    font-weight: bold;
+    font-family: "RibEyeMarrow normal", Courier, monospace;
+    background-color: rgb(255, 255, 240);
+    top: 10px;
+    left: 10px;
+  
+    &.reverse {
+        top: unset; 
+        left: unset;
+        width: 60px;
+        height: 60px;
+        margin: 10px;
+        padding: 0px 10px;
+        transform: rotate(180deg);
+        bottom: 0;
+        right: 0;  
+     }
+    }
+
+  > .card-task {
+    top: 40%;
+    font-size: 1.5rem;
+    width: 80%;
+    text-align: center;
+  }
+  > .card-moodpic {
+    top: 20%;
+    font-size: 1.8rem;
+    width: 90%;
+    text-align: center;
+  }
+  > .card-color {
+    font-size: 3rem;
+    padding: 0 10px;
+    font-weight: bold;
+    font-family: "RibEyeMarrow normal", Courier, monospace;
+    width: 160px;
+    height: 160px;
+    top: 130px;
+    left: -10px;
+    z-index: 0;
+    > .card-symbol {
+      opacity: 0.4;
+    }
+  }
+}

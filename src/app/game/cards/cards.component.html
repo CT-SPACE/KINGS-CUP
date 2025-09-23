@@ -1,0 +1,14 @@
+<div *ngIf="cards.length" class="card-frame"  [ngStyle]="getCardStyle()">
+  <div class="card-content" *ngIf="cards[currentCardIndex]">
+    <div class="card-short">{{cards[currentCardIndex].short}}</div>
+    <div class="card-moodpic">{{cards[currentCardIndex].moodpic}}</div>
+    <div class="card-task">{{cards[currentCardIndex].task}}</div>
+    <!-- <div class="card-color" [style.color]="cards[currentCardIndex].color" [style.outlineColor]="cards[currentCardIndex].color">-->
+    <div class="card-color">
+      <svg class="card-symbol">
+        <use [attr.href]="cards[currentCardIndex].typeIcon" />
+      </svg>
+    </div>
+    <div class="card-short reverse">{{cards[currentCardIndex].short}}</div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+@import "./../../styles";
+
+
+.field {
+	height: 2px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-image: linear-gradient(to top right, fuchsia, #5b4e5f);
+	overflow: hidden;
+	width:100vw;
+	&.expand {
+	transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 50vh;
+    border:1px solid $cardColor-red
+	}
+}
+.card-stack {
+	position: relative;
+    display: flex;
+	width:300px;
+	  left:200px;
+    justify-content: center;
+    align-items: center;
+	border-radius: 20px;
+    background: #e5b6e5d0;
+    height: calc(300px * 1.76);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+}
+.cardback {
+	width: 300px;
+	cursor:pointer;
+	height: auto;
+	aspect-ratio: 0.56;
+	border-radius: 22px;
+	position:absolute;
+	 box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+	 &:hover{
+		transform:  translateY(-10px) translateX(-10px);
+	 }
+	 &.topCard{
+		cursor:pointer;
+		  left:-400px;
+	right: 30px;
+    top: 2px;
+    border: 2px solid $cardColor-red;
+    transform: rotate(5deg);
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
+	 &:hover{
+		transform: rotate(-5deg) scale(1.05) translateY(-20px);
+	 }
+		transition: transform 0.125s ease;
+	 }
+	>img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	border-radius: 20px;
+	}
+.pick{
+	transition: all 125ms eas-in-out;
+	animation: pick-animation 0.5 ease-in-out forwards;
+}
+@keyframes pick-animation{
+	0%{
+		transform: scale(1) translateY(0) rotate(0deg);
+	}
+	100%{
+		transform: scale(1.5) translateY(300px) rotate(360deg);	
+	}
+}
+	
+}
