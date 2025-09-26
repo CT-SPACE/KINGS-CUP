@@ -1,10 +1,16 @@
+// import { Game, Card } from './../models/game';
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GameService {
 
+
+
+
+export class GameService {
+  // game: Game;
   constructor() { }
 
   gameCards = [
@@ -91,24 +97,26 @@ typeList =[
 {	
 	type:"herz",
 	typeIcon:"./assets/img/symbol_hearts.svg",
-	color: "$cardColor-red"
+	color: "var(--cardColor-red)"
 },
 {	
 	type:"blatt",
 	typeIcon:"./../assets/img/symbol_spades.svg",
-	color: "$cardColor-dark"
+	color: "var(--cardColor-dark)"
 },
 {	
 	type:"karo",
 	typeIcon: "./../assets/img/symbol_diamonds.svg",
-	color: "$cardColor-red"
+	color: "var(--cardColor-red)"
 },
 {	
 	type:"kreuz",
 	typeIcon:"-/../assets/img/symbol_clubs.svg",
-	color: "$cardColor-dark"
+	color: "var(--cardColor-dark)"
 }
-]	
+]	;
+
+getAllCards = this.getCards();
 
   getCards(){
     let cards = [];
@@ -123,4 +131,12 @@ typeList =[
       }
 }   return cards;
   }
+
+// beginGame(cards: Card[]) {
+//     this.game = this.game.startGame(cards);
+//   }
+
+//   drawCard(): Card | null {
+//     return this.game.getNextCard(this.game);
+//   }
 }

@@ -1,14 +1,21 @@
 <div class="field" [ngClass]="{ 'expand': isExpanded }">
+    <div class="title" [class.fly-in]="showTitle">
+        <img class="logo" src="./../../assets/img/logo.png">
+  <h1>KING'S CUP</h1>
+    </div>        
 <div class="card-stack">
-    <div class="cardback"  [ngStyle]="{'right.px':i*5}" *ngFor="let c of [1,2,3,4,5]; let i = index;" >
+    <div class="cardback"  [ngStyle]="{'right.px':i*5,'top.px':i*-3}" *ngFor="let c of [1,2,3,4,5]; let i = index;" >
         <img src="./../assets/img/cardback.png">
     </div>
-      <div class="cardback topCard pick" (click)="takeCard()">
-        <!-- <img src="./../assets/img/cardback.png">   -->
-         <app-cards></app-cards>
-        
-        </div>
-        
+<div style="right:25px" (click)="takeCard()"  class="cardback pick-card" >
+        <img src="./../assets/img/cardback.png">
+    </div>
+<div id="newCard" *ngIf="takeCardAnimation" [class.pick]="takeCardAnimation">
+  <!-- <img src="./../assets/img/cardback.png"> -->
+  
+
+   <app-cards></app-cards>
+</div>     
     </div>
   
 </div>

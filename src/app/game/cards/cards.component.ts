@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [ CommonModule, CardComponent],
+  imports: [ CommonModule],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'
 })
@@ -25,24 +25,23 @@ cards: any[] = [];
   }
 
   
-  shuffle(array: any[]) {
-    return array
-      .map(value => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
-  }
 
   showNextCard() {
     if (this.currentCardIndex < this.cards.length - 1) {
       this.currentCardIndex++;
     }
 
+
   }
   getCardStyle() {
   const color = this.cards[this.currentCardIndex]?.color || '#000';
+  
   return {
-    color: color,
-    'outline-color': color
+  color: color,
+  outlineColor: color,
+  outlineStyle: 'solid',
+  outlineWidth: '2px',
+  outlineOffset: '-30px'
   };
 }
 

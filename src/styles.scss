@@ -24,6 +24,12 @@
 $cardColor-red: orangered;
 $cardColor-dark: #8b13a0;
 
+:root {
+  --cardColor-red: orangered;
+  --cardColor-purple: rebeccapurple;
+
+}
+
 
 *{
     margin: 0;
