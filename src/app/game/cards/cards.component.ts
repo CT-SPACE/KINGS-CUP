@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { GameService } from './../../game.service';
-import { CardComponent } from './card/card.component';
+// import { GameService } from './../../game.service';
+// import { CardComponent } from './card/card.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,11 +16,12 @@ cards: any[] = [];
   currentCardIndex = 0;
 // allCards = inject(GameService);
 
-  constructor(private gameService: GameService) {}
+  // constructor(private gameService: GameService) {}
 
+constructor(){}
 
   ngOnInit() {
-   this.cards = this.gameService.getCards();
+  //  this.cards = this.gameService.getCards();
    
   }
 

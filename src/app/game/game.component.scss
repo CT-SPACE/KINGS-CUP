@@ -46,13 +46,12 @@
   position: relative;
   display: flex;
   width: 300px;
-  aspect-ratio: 0.56;
+  aspect-ratio: 0.64;
   left: 200px;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   background: #e5b6e5d0;
-  height: calc(300px * 1.76);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
       transition: transform 0.125s ease;
     &.topCard {
@@ -71,7 +70,7 @@
 .cardback {
   width: 300px;
   cursor: pointer;
-  aspect-ratio: 0.56;
+  aspect-ratio: 0.64;
   border-radius: 22px;
   position: absolute;
   box-sizing:border-box;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardsComponent } from './cards/cards.component';
+// import { CardsComponent } from './cards/cards.component';
 import { Game } from './../../models/game';
 // import { GameService } from './../game.service';
 
@@ -8,7 +8,7 @@ import { Game } from './../../models/game';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule,CardsComponent],
+  imports: [CommonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
