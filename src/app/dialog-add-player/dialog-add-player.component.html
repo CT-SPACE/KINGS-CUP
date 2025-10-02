@@ -1,0 +1,16 @@
+<div class="dialog-container">
+<mat-dialog-content>
+    <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addIcon">
+  <mat-form-field appearance="fill" class="player-input">
+    <mat-label class="player-input">Add Name</mat-label>
+    <input matInput [(ngModel)]="name">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+      <button mat-button  cdkFocusInitial class="circle">
+        <mat-icon class="addIcon">add</mat-icon>
+  </button>
+  <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+
+</mat-dialog-actions>
+</div>

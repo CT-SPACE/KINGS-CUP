@@ -1,23 +1,39 @@
+<div class="player-list">
+    <app-player *ngFor="let player of game?.players; let i = index" [ngStyle]="{'top.px': 350 + (i * 80)}"
+        [name]="player" class="players"></app-player>
+    <button mat-fab color="--mdc-fab-container-color"
+        class="addPerson" (click)="openDialog()"> <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addBeer">
+        <mat-icon class="addIcon">add</mat-icon>
+    </button>
+
+</div>
 <div class="field" [ngClass]="{ 'expand': isExpanded }">
     <div class="title" [class.fly-in]="showTitle">
         <img class="logo" src="./../../assets/img/logo.png">
-  <h1>KING'S CUP</h1>
-    </div>        
-<div class="card-stack">
-    <div class="cardback"  [ngStyle]="{'right.px':i*5,'top.px':i*-3}" *ngFor="let c of [1,2,3,4,5]; let i = index;" >
-        <img src="./../assets/img/cardbackside.png">
+        <h1>KING'S CUP</h1>
     </div>
-<div style="right:25px" (click)="takeCard()"  class="cardback pick-card" >
-        <img src="./../assets/img/cardbackside.png">
-    </div>
-<div id="newCard" *ngIf="takeCardAnimation" [class.pick]="takeCardAnimation">
- <img src="./../assets/img/cardbackside.png">
-  
+    <div class="card-stack">
+        <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
+            *ngFor="let c of [1,2,3,4,5,6,7,8,9,10]; let i = index;">
+            <img src="./../assets/img/cardbackside.png">
+        </div>
+        <div style="right:25px" (click)="takeCard()" class="cardback pick-card">
+            <img src="./../assets/img/cardbackside.png">
+        </div>
+        <div id="playedCards" *ngFor="let card of game?.playedCards; let i = index"
+            [style.transform]="'scale(1) translateX(-360px) rotate(' + getRandomRotation(i) + 'deg)'"
+            class="playedCard">
+            <img src="assets/img/cards/{{ card }}">
 
-   <!-- <app-cards></app-cards> -->
-</div>     
+        </div>
+        <div id="newCard" *ngIf="takeCardAnimation" [class.pick]="takeCardAnimation" (click)="takeCard()">
+            <img src="assets/img/cards/{{ currentCard }}">
+
+
+            <!-- <app-cards></app-cards> -->
+        </div>
+
+
     </div>
-  
+
 </div>
-
-

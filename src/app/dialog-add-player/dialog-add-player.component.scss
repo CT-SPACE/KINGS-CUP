@@ -1,0 +1,43 @@
+.player-input{
+    font-family: 'ArchitectsDaughter normal', sans-serif !important;
+   
+}
+.addIcon{
+    width:40px;
+}
+
+.fs20{
+    font-size:20px;
+}
+
+img.addIcon{
+    position: relative;
+    top: 10px;
+    left: -5px;
+}
+
+.circle{
+    border:1px solid black;
+    border-radius:50%;
+
+}
+button.circle{
+    width: 40px !important;
+    aspect-ratio: 1 !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+}
+
+::ng-deep .mdc-button{
+    min-width: 30px !important;
+
+}
+.dialog-container{
+        display: flex !important;
+    align-items: center !important;
+    margin: 0;
+    padding: 0;
+}
+.mdc-dialog__content{
+    padding-bottom:0 !important;
+}

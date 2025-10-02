@@ -27,6 +27,7 @@ $cardColor-dark: #8b13a0;
 :root {
   --cardColor-red: orangered;
   --cardColor-purple: rebeccapurple;
+    --mdc-fab-container-color: #ffabf3;
 
 }
 
@@ -37,7 +38,7 @@ $cardColor-dark: #8b13a0;
     box-sizing: border-box;
 }
 body{
-    font-family: 'ArchitectsDaughter normal', sans-serif;
+    font-family: 'ArchitectsDaughter normal', sans-serif !important;
 
     background-image: url("./assets/img/hg_35.png"),
     linear-gradient(to bottom right, #81407d, #130f14);
@@ -59,3 +60,5 @@ h1{
     text-align: center;
     margin-bottom: 2rem;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

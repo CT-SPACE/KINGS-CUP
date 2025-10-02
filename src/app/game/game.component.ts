@@ -1,24 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PlayerComponent } from '../player/player.component';
 // import { CardsComponent } from './cards/cards.component';
 import { Game } from './../../models/game';
 // import { GameService } from './../game.service';
+import { MatIconModule } from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDialog } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PlayerComponent, MatIconModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
   takeCardAnimation = false;
   isExpanded = false;
   showTitle = false;
   game: Game | undefined;
+  currentCard: string | undefined = '';
+  randomRotation = 0;
+  name: string = '';
 
-  ngOnInit() {
+  constructor(public dialog: MatDialog){}
+
+  ngOnInit(): void {
     setTimeout(() => {
       this.isExpanded = true;
      
@@ -32,17 +44,41 @@ this.newGame();
     this.game = new Game();
     console.log(this.game);
   }
-  takeCard(){
-    this.takeCardAnimation = true;
-    setTimeout(() => {
-  this.takeCardAnimation = false;
-}, 500)
-    
-  }
 
-  getRandomRotation(): string {
-  const deg = (Math.random() * 6) - 3; // -3 bis +3
-  return `rotate(${deg}deg)`;
+takeCard() {
+  if (this.takeCardAnimation) return; 
+  if (this.game && this.game.stack.length > 0) {
+    this.currentCard = this.game.stack.pop() || '';
+    this.takeCardAnimation = true;
+    // Nach der Animation:
+    setTimeout(() => {
+      if (this.currentCard) {
+        const cardToAdd = this.currentCard;
+        // this.currentCard = '';
+        this.takeCardAnimation = false;
+        this.game?.playedCards.push(cardToAdd);
+      }
+    }, 500); // Zeit passend zur Animation wählen
+  }
 }
-  
- }
+
+  cardCount = 52;
+get cardArray() {
+  return Array.from({ length: this.cardCount });
+}
+
+  getRandomRotation(index: number): number {
+  return (index * 7) % 12 - 6;
+  }
+ 
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('name');
+      
+   
+    });
+  }
+}
