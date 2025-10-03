@@ -28,6 +28,7 @@ export class GameComponent implements OnInit {
   randomRotation = 0;
   name: string = '';
 
+
   constructor(public dialog: MatDialog){}
 
   ngOnInit(): void {
@@ -50,6 +51,7 @@ takeCard() {
   if (this.game && this.game.stack.length > 0) {
     this.currentCard = this.game.stack.pop() || '';
     this.takeCardAnimation = true;
+    this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.players.length;
     // Nach der Animation:
     setTimeout(() => {
       if (this.currentCard) {
@@ -75,9 +77,12 @@ get cardArray() {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('name');
-      
+    dialogRef.afterClosed().subscribe((name: string) => {
+      // console.log('name', result );
+       if (name && name.trim() !== ''){
+         this.game?.players.push(name);
+       }
+     
    
     });
   }

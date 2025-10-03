@@ -19,4 +19,6 @@ import { MatInputModule } from '@angular/material/input';
 export class DialogAddPlayerComponent {
   name: string = '';
 
+
+  
 }

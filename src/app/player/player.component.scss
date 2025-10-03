@@ -2,7 +2,7 @@
 // }
 .player{
     background-color:#ffffff50;
-    height:60px;
+    height:40px;
     padding:10px;
     display:flex;
     width:300px;
@@ -18,16 +18,32 @@
         font-size:2rem;
         font-variant-caps: all-small-caps;
     }
-    >img{
-        align-self:center;
-        justify-self: right;
+    .iconCircle{
         background-color:white;
         border:2px solid rebeccapurple;
-        width:50px;
-        height:50px;
-        padding:5px;
+                border-radius: 50%;
+                        padding:4px 5px 5px 4px;
+                        width:40px;
+                        aspect-ratio:1;
+                        height:40px;
+
+     >img{
+        align-self:center;
+        justify-self: right;
+ 
+        aspect-ratio:1;
+        height:100%;
+
         object-fit:contain;
-        border-radius: 50%;
+
 
     }
+    }
+
+}
+.player-active{
+    background-color:#ffffff;
+    box-shadow: 0 0 10px 2px rebeccapurple;
+    transform: scale(1.15);
+    transition: all 0.3s ease-in-out;
 }

@@ -18,7 +18,7 @@ img.addIcon{
 
 .circle{
     border:1px solid black;
-    border-radius:50%;
+    border-radius:10px;
 
 }
 button.circle{
@@ -28,13 +28,36 @@ button.circle{
     padding: 0 !important;
 }
 
-::ng-deep .mdc-button{
+::ng-deep.mdc-dialog__surface{
+    background-color: unset !important;
+}
+::ng-deep.mdc-button{
     min-width: 30px !important;
 
+}
+::ng-deep.mat-icon{
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+mat-icon{
+    margin:0 !important;
+}
+mat-form-field{
+    input{
+        font-size:30px !important;
+    }
+}
+mat-dialog-actions{
+        padding-left: unset;
+    padding-right: 26px;
 }
 .dialog-container{
         display: flex !important;
     align-items: center !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     margin: 0;
     padding: 0;
 }
