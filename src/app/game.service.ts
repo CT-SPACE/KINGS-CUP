@@ -96,22 +96,22 @@ export class GameService {
 typeList =[
 {	
 	type:"herz",
-	typeIcon:"./assets/img/symbol_hearts.svg",
+	typeIcon:"assets/img/symbol_hearts.svg",
 	color: "var(--cardColor-red)"
 },
 {	
 	type:"blatt",
-	typeIcon:"./../assets/img/symbol_spades.svg",
+	typeIcon:"assets/img/symbol_spades.svg",
 	color: "var(--cardColor-dark)"
 },
 {	
 	type:"karo",
-	typeIcon: "./../assets/img/symbol_diamonds.svg",
+	typeIcon: "assets/img/symbol_diamonds.svg",
 	color: "var(--cardColor-red)"
 },
 {	
 	type:"kreuz",
-	typeIcon:"-/../assets/img/symbol_clubs.svg",
+	typeIcon:"assets/img/symbol_clubs.svg",
 	color: "var(--cardColor-dark)"
 }
 ]	;

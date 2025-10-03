@@ -4,20 +4,20 @@
     font-display:swap;
     font-family: 'ArchitectsDaughter normal';
     font-style: normal;
-    src: url('./assets/font/architectsdaughter-regular-webfont.woff2') format('woff2');
+    src: url('assets/font/architectsdaughter-regular-webfont.woff2') format('woff2');
 }
 @font-face{
     font-display:swap;
     font-family: 'RibEyeMarrow normal';
     font-style: normal;
-    src: url('./assets/font/ribeyemarrow-regular-webfont.woff2') format('woff2');
+    src: url('assets/font/ribeyemarrow-regular-webfont.woff2') format('woff2');
 }
 
 @font-face{
     font-display:swap;
     font-family: 'Methamorphous normal';
     font-style: normal;
-    src: url('./assets/font/metamorphous-regular-webfont.woff2') format('woff2');
+    src: url('assets/font/metamorphous-regular-webfont.woff2') format('woff2');
 }
 
 
@@ -40,7 +40,7 @@ $cardColor-dark: #8b13a0;
 body{
     font-family: 'ArchitectsDaughter normal', sans-serif !important;
 
-    background-image: url("./assets/img/hg_35.png"),
+    background-image: url("assets/img/hg_35.png"),
     linear-gradient(to bottom right, #81407d, #130f14);
     background-repeat:repeat, no-repeat;
     background-size: 50px, cover;
