@@ -14,7 +14,7 @@
     </div>
     <div class="card-stack">
         <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
-            *ngFor="let c of [1,2,3,4,5,6,7,8,9,10]; let i = index;">
+            *ngFor="let c of game?.stackCount; let i = index;">
             <img src="./../assets/img/cardbackside.png">
         </div>
         <div style="right:25px" (click)="takeCard()" class="cardback pick-card">
@@ -35,5 +35,6 @@
 
 
     </div>
-
+    <div class="pin-rule">
+<app-game-rule [card]="currentCard"></app-game-rule></div>
 </div>

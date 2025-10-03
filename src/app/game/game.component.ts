@@ -10,12 +10,13 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { GameRuleComponent } from '../game-rule/game-rule.component';
 
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, PlayerComponent, MatIconModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule ],
+  imports: [GameRuleComponent, CommonModule, PlayerComponent, MatIconModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -24,9 +25,10 @@ export class GameComponent implements OnInit {
   isExpanded = false;
   showTitle = false;
   game: Game | undefined;
-  currentCard: string | undefined = '';
+  currentCard: string = '';
   randomRotation = 0;
   name: string = '';
+  stackCount = [1,2,3,4,5,6,7,8.9,10]
 
 
   constructor(public dialog: MatDialog){}
@@ -41,26 +43,28 @@ this.newGame();
   }
 
   newGame(){
-    // const cards = this.GameService.getCards();
     this.game = new Game();
     console.log(this.game);
   }
 
 takeCard() {
   if (this.takeCardAnimation) return; 
+  if (this.game?.players.length! < 2) {
+    alert('Please add at least two players to start the game.');
+    return;
+  }
   if (this.game && this.game.stack.length > 0) {
     this.currentCard = this.game.stack.pop() || '';
     this.takeCardAnimation = true;
     this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.players.length;
-    // Nach der Animation:
+    
     setTimeout(() => {
       if (this.currentCard) {
         const cardToAdd = this.currentCard;
-        // this.currentCard = '';
         this.takeCardAnimation = false;
         this.game?.playedCards.push(cardToAdd);
       }
-    }, 500); // Zeit passend zur Animation wählen
+    }, 500); 
   }
 }
 

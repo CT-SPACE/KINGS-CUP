@@ -3,6 +3,7 @@ export class Game {
   public stack: string[] = [];
   public playedCards: string[] = [];
   public currentPlayer: number = 0;
+  public stackCount = [1,2,3,4,5,6,7,8.9,10];
 
   constructor() {
     for(let i=1; i < 14; i++){
