@@ -24,7 +24,7 @@ cardAction = [
     { title: 'Dudes', description: 'All men drink.' },
     { title: 'Quizmaster', description: 'You are the Question Master. If someone answers a question from you, he has to drink' },
     { title: 'Never have i ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
-    { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
+    { title: 'King\'s Cup', description: 'Pour some of your drink into the Cup. Who picks the last King drinks the cup.' },
   ];
 
 title: string = "";
