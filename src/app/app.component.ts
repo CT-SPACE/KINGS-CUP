@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
+import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+// import { AsyncPipe } from '@angular/common';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'kings-cup';
+    firestore: Firestore = inject(Firestore);
 }
+
