@@ -11,6 +11,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameRuleComponent } from '../game-rule/game-rule.component';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { inject } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { collection, collectionData, addDoc, doc, updateDoc } from '@angular/fire/firestore';
+
 
 
 @Component({
@@ -28,15 +34,19 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   randomRotation = 0;
   name: string = '';
-  stackCount = [1,2,3,4,5,6,7,8.9,10]
+  stackCount = [1,2,3,4,5,6,7,8,9,10];
+  firestore: Firestore = inject(Firestore);
+  gameId: string = '';
 
+  get gamesCollection() {
+    return collection(this.firestore, 'game');}
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog){
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.isExpanded = true;
-     
     }, 200);
      setTimeout(() => this.showTitle = true, 800);
 this.newGame();
@@ -44,7 +54,28 @@ this.newGame();
 
   newGame(){
     this.game = new Game();
-    console.log(this.game);
+    
+    addDoc(this.gamesCollection, this.game.toJSON())
+      .then((docRef) => {
+        this.gameId = docRef.id;
+        console.log('New game created with Firestore ID:', this.gameId);
+      })
+      .catch((error) => {
+        console.error('Error creating game:', error);
+      });
+  }
+
+  updateGameInFirestore() {
+    if (this.game && this.gameId) {
+      const gameDoc = doc(this.firestore, 'game', this.gameId);
+      updateDoc(gameDoc, this.game.toJSON())
+        .then(() => {
+          console.log('Game updated in Firestore with ID:', this.gameId);
+        })
+        .catch((error) => {
+          console.error('Error updating game:', error);
+        });
+    }
   }
 
 takeCard() {
@@ -77,17 +108,31 @@ get cardArray() {
   return (index * 7) % 12 - 6;
   }
  
-
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+  const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
+    autoFocus: false, // Deaktiviert automatischen Focus
+    restoreFocus: false // Verhindert Focus-Wiederherstellung
+  });
 
-    dialogRef.afterClosed().subscribe((name: string) => {
-      // console.log('name', result );
-       if (name && name.trim() !== ''){
-         this.game?.players.push(name);
-       }
+  dialogRef.afterClosed().subscribe((name: string) => {
+    if (name && name.trim() !== ''){
+      this.game?.players.push(name);
+      this.updateGameInFirestore();
+    }
+  });
+}
+
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+  //   dialogRef.afterClosed().subscribe((name: string) => {
+  //     // console.log('name', result );
+  //      if (name && name.trim() !== ''){
+  //        this.game?.players.push(name);
+  //         this.updateGameInFirestore();
+  //      }
      
    
-    });
-  }
+  //   });
+  // }
 }
