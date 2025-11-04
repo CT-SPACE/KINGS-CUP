@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlayerComponent } from '../player/player.component';
 // import { CardsComponent } from './cards/cards.component';
 import { Game } from './../../models/game';
+
 // import { GameService } from './../game.service';
 import { MatIconModule } from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,9 +14,10 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 import { GameRuleComponent } from '../game-rule/game-rule.component';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { inject } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, getDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { collection, collectionData, addDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -37,6 +39,8 @@ export class GameComponent implements OnInit {
   stackCount = [1,2,3,4,5,6,7,8,9,10];
   firestore: Firestore = inject(Firestore);
   gameId: string = '';
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
   get gamesCollection() {
     return collection(this.firestore, 'game');}
@@ -49,20 +53,73 @@ export class GameComponent implements OnInit {
       this.isExpanded = true;
     }, 200);
      setTimeout(() => this.showTitle = true, 800);
+
+     const gameIdFromUrl = this.route.snapshot.paramMap.get('id');
+    
+    if (gameIdFromUrl) {
+      // Lade bestehendes Spiel von Firestore
+      this.gameId = gameIdFromUrl;
+      this.loadGameFromFirestore();
+    } else {
 this.newGame();
+    }
   }
 
   newGame(){
     this.game = new Game();
+    this.gameId = '';
     
+    // addDoc(this.gamesCollection, this.game.toJSON())
+    //   .then((docRef) => {
+    //     this.gameId = docRef.id;
+    //     console.log('New game created with Firestore ID:', this.gameId);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error creating game:', error);
+    //   });
+  }
+
+  saveNewGameToFirestore() {
+  if (this.game) {
     addDoc(this.gamesCollection, this.game.toJSON())
       .then((docRef) => {
         this.gameId = docRef.id;
-        console.log('New game created with Firestore ID:', this.gameId);
+       // this.router.navigate(['/game', this.gameId], { replaceUrl: true });
+       window.history.replaceState(null, '', `/game/${this.gameId}`);
       })
       .catch((error) => {
-        console.error('Error creating game:', error);
+        console.error('Error saving game to Firestore:', error);
       });
+  }
+}
+
+loadGameFromFirestore() {
+    if (this.gameId) {
+      const gameDoc = doc(this.firestore, 'game', this.gameId);
+      getDoc(gameDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const gameData = docSnap.data();
+          // Game-Objekt aus Firestore-Daten rekonstruieren
+          this.game = new Game();
+          this.game.players = gameData['players'] || [];
+          this.game.currentPlayer = gameData['currentPlayer'] || 0;
+          this.game.playedCards = gameData['playedCards'] || [];
+          
+          // Stack rekonstruieren (falls nötig)
+          if (gameData['stack']) {
+            this.game.stack = gameData['stack'];
+          }
+          
+          console.log('Game loaded from Firestore:', this.gameId);
+        } else {
+          console.log('Game not found, creating new one');
+          this.newGame();
+        }
+      }).catch((error) => {
+        console.error('Error loading game:', error);
+        this.newGame();
+      });
+    }
   }
 
   updateGameInFirestore() {
@@ -95,6 +152,10 @@ takeCard() {
         this.takeCardAnimation = false;
         this.game?.playedCards.push(cardToAdd);
       }
+
+      if (this.gameId !== '') {
+          this.updateGameInFirestore();
+        }
     }, 500); 
   }
 }
@@ -108,16 +169,22 @@ get cardArray() {
   return (index * 7) % 12 - 6;
   }
  
-  openDialog(): void {
+openDialog(): void {
   const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
-    autoFocus: false, // Deaktiviert automatischen Focus
-    restoreFocus: false // Verhindert Focus-Wiederherstellung
+    autoFocus: 'dialog'
   });
 
   dialogRef.afterClosed().subscribe((name: string) => {
     if (name && name.trim() !== ''){
       this.game?.players.push(name);
-      this.updateGameInFirestore();
+      
+      if (this.game && this.game.players.length >= 2) {
+        if (this.gameId === '') {
+          this.saveNewGameToFirestore();
+        } else {
+          this.updateGameInFirestore();
+        }
+      }
     }
   });
 }

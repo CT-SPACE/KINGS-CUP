@@ -13,11 +13,23 @@
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
     height: 50vh;
     border: 1px solid $cardColor-red;
+  
+  @media (max-height:800px){
+    height: 80vh;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: -30vh;
+    display: flex;
+    overflow: visible;
+    align-items: end;
   }
+}
 }
 .title{
   position: absolute;
-  top: -150px !important;
+  top: -130px !important;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -16,7 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() =>
       initializeApp({
         projectId: 'kings-cup-5e9b9',
-        appId: '1:937211998351:web:f98e210ee4d6d9f0c9c0fa',
+        // appId: '1:937211998351:web:f98e210ee4d6d9f0c9c0fa',
+          appId: "1:937211998351:web:feeaff04f9faf511c9c0fa",
         storageBucket: 'kings-cup-5e9b9.firebasestorage.app',
         apiKey: 'AIzaSyDbTEFHwQlGjlxc4Zfw1i-1WTy42EOnz6o',
         authDomain: 'kings-cup-5e9b9.firebaseapp.com',
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
 provideFirestore(() => getFirestore()),
-provideAuth(() => getAuth()),
+// provideAuth(() => getAuth()),
   ],
 
   // firebase.initializeApp(firebaseConfig),
