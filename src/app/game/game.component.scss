@@ -1,35 +1,38 @@
-@import "./../../styles";
+@import "./../../styles.scss";
 
 
 .field {
   height: 2px;
   display: flex;
   justify-content: center;
+  position:relative;
+  z-index:1;
   align-items: center;
   background-image: linear-gradient(to top right, fuchsia, #5b4e5f);
-  overflow: hidden;
+  overflow: visible;
   width: 100vw;
+      border: 1px solid $cardColor-red;
   &.expand {
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 50vh;
-    border: 1px solid $cardColor-red;
-  
+    height: 60vh;
+}
+}
   @media (max-height:800px){
-    height: 80vh;
+  .field.expand{  
+    height: 80vh !important;
     position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
-    top: -30vh;
+    top: -30vh !important;
     display: flex;
-    overflow: visible;
     align-items: end;
   }
-}
 }
 .title{
   position: absolute;
   top: -130px !important;
+  z-index:2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,14 +55,20 @@
     font-size: 3rem;
     text-align: center;
     margin-bottom: 2rem;
+        @media (max-width: 400px){
+        font-size: clamp(2rem, 10vw, 3rem) !important;
+        line-height: normal;
+        padding:10px;
+
+    }
   }
 }
 .card-stack {
   position: relative;
   display: flex;
-  width: 220px;
+  width:clamp(100px, 30vw, 220px) !important;
   aspect-ratio: 0.64;
-  height: calc(width / aspect-ratio);
+  height: calc(width / 0.64);
   left: 200px;
   justify-content: center;
   align-items: center;
@@ -78,10 +87,15 @@
     &:hover {
       transform: rotate(-5deg) scale(1) translateY(-20px);
     }
+
 }
-}
+    @media (max-width:800px){
+      top: -5vh !important;
+      left:100px !important;
+    }
+ }
 .cardback {
-  width: 220px;
+  width: 100%;
   cursor: pointer;
   aspect-ratio: 0.64;
   border-radius: 22px;
@@ -135,36 +149,48 @@
 
    .playedCard{
     position: absolute;
-    width:220px;
+    width:clamp(120px, 30vw, 220px) !important;
     > img{
       width:100%;
       height:100%;
       border-radius:20px;
       box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     } 
+    @media (max-width:800px){
+      right: -60px;
+    } 
 // transform: scale(1) translateX(-360px);
    }
 .player-list{
-  display: flex
-;
+  display: flex;
     position: absolute;
     flex-direction: column;
     justify-content: start;
-    width: 250px;
+    width: 200px;
     height: 80%;
     right: 0;
     z-index: 5;
     align-items: end;
+    @media (max-height:800px){
+      top:-30vh;
+      width:150px !important;
+
+    }
 }
 
 .players{
   margin: 10px 0 10px 10px;
+  @media(max-width:400px){
+    margin:5px 0 5px 5px;
+  }
 }
 
 .addPerson{
 
     margin:20px;
-
+  position:fixed;
+    bottom:0;
+    right:0;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     border: 1px solid black;
     display: flex;
@@ -172,7 +198,7 @@
     img{
       width:40px; 
       height:40px; 
-      position:relatived;
+      position:relative;
       top:2px
     }
     .addIcon{
@@ -202,11 +228,12 @@ box-sizing:border-box;
 }
   
 app-game-rule{
-    
- 
-    width: 80%;
+        width: 80%;
     max-width: 800px;
-    min-width: 320px;
+    min-width: 200px;
+    @media (max-width: 768px){
+      width: 94vw !important;
+    }
 }
 .displayNone{
   display:none; 

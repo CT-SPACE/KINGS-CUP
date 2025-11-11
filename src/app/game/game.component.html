@@ -1,16 +1,16 @@
 <div class="player-list">
     <app-player *ngFor="let player of game?.players; let i = index" [ngStyle]="{'top.px': 350 + (i * 80)}"
       [playerActive]="i == game?.currentPlayer"  [name]="player" class="players"></app-player>
-    <button mat-fab color="--mdc-fab-container-color"
+    <!-- <button mat-fab color="--mdc-fab-container-color"
         class="addPerson" (click)="openDialog()"> <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addBeer">
         <mat-icon class="addIcon">add</mat-icon>
-    </button>
+    </button> -->
 
 </div>
 <div class="field" [ngClass]="{ 'expand': isExpanded }">
     <div class="title" [class.fly-in]="showTitle">
         <img class="logo" src="assets/img/logo.png">
-        <h1>KING'S CUP</h1>
+        <h1>KING'S&nbsp;CUP</h1>
     </div>
     <div class="card-stack">
         <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
@@ -36,5 +36,9 @@
 
     </div>
     <div class="pin-rule">
-<app-game-rule [card]="currentCard"></app-game-rule></div>
+<app-game-rule [card]="currentCard"></app-game-rule>
+    <button mat-fab color="--mdc-fab-container-color"
+        class="addPerson" (click)="openDialog()"> <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addBeer">
+        <mat-icon class="addIcon">add</mat-icon>
+    </button></div>
 </div>

@@ -1,14 +1,15 @@
-// :root {--mdc-fab-container-color: #ffabf3;
-// }
+@import "./../../styles.scss";
+
+
 .player{
     background-color:#ffffff50;
     height:40px;
     padding:10px;
     display:flex;
-    width:300px;
+    width:250px;
     align-items:center;
     gap:15px;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
     span{
         font-size: clamp(1rem, 2vw, 1.5rem);
         font-weight:600;
@@ -20,7 +21,7 @@
     }
     .iconCircle{
         background-color:white;
-        border:2px solid rebeccapurple;
+        border:1.6px solid rebeccapurple;
                 border-radius: 50%;
                         padding:4px 5px 5px 4px;
                         width:40px;
@@ -39,6 +40,27 @@
 
     }
     }
+    @media (max-width:800px){
+        width:max-content;
+        height:30px;
+        padding:5px 10px 5px 5px;
+        gap:10px;
+        .iconCircle{
+            width:30px;
+            height:30px;
+            margin-left:5px;
+            padding:2px 3px 3px 4px;
+            >img{
+                height:100%;
+            }
+        }
+        span{
+            font-size: clamp(0.8rem, 4vw, 1.2rem);
+        }
+        .player-name{
+            font-size: clamp(1rem, 5vw, 1.5rem);
+        }
+    }   
 
 }
 .player-active{
