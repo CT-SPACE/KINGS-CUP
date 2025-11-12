@@ -12,7 +12,7 @@
         <img class="logo" src="assets/img/logo.png">
         <h1>KING'S&nbsp;CUP</h1>
     </div>
-    <div class="card-stack">
+    <!-- <div class="card-stack">
         <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
             *ngFor="let c of game?.stackCount; let i = index;">
             <img src="assets/img/cardbackside.png">
@@ -30,11 +30,32 @@
             <img src="assets/img/cards/{{ currentCard }}">
 
 
-            <!-- <app-cards></app-cards> -->
+            
         </div>
 
 
+    </div> -->
+
+    <!-- Ändere die HTML-Struktur minimal -->
+<div class="card-container">
+  <div class="card-stack-area">
+    <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
+        *ngFor="let c of game?.stackCount; let i = index;">
+      <img src="assets/img/cardbackside.png">
     </div>
+    <div style="right:25px" (click)="takeCard()" class="cardback pick-card">
+      <img src="assets/img/cardbackside.png">
+    </div>
+  </div>
+  
+  <div class="played-cards-area">
+    <div *ngFor="let card of game?.playedCards; let i = index"
+        [style.transform]="'rotate(' + getRandomRotation(i) + 'deg)'"
+        class="playedCard">
+      <img src="assets/img/cards/{{ card }}">
+    </div>
+  </div>
+</div>
     <div class="pin-rule">
 <app-game-rule [card]="currentCard"></app-game-rule>
     <button mat-fab color="--mdc-fab-container-color"

@@ -3,7 +3,7 @@
 mat-card{
     padding:20px; 
     display:flex;
-    flex-direction: center;
+    flex-direction: column;
     align-items:center;
     justify-content: center;
     background-color: #00000050 !important;
@@ -17,10 +17,15 @@ mat-card{
     }
     mat-card-content{
         padding: unset;
-        margin:0;
-         line-height:1.8rem;
+        margin:10px 0 0 0;
+         line-height:1.5rem;
         font-size: 1.8rem;
-        margin-top:10px;
+    }
+
+    @media (max-height:800px), (max-width:400px){
+
+            padding:10px 10px 5px 10px; 
+        
     }
 
 }
