@@ -1,31 +1,83 @@
 @import "./../../styles.scss";
 
-mat-card{
-    padding:20px; 
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: center;
-    background-color: #00000050 !important;
-    color:white;
-    border-radius:20px 20px 0 0;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    mat-card-title{
-        font-family: 'Methamorphous normal';
-        font-size: clamp(1.5rem, 10%, 2.5rem);
-        color:red;
+// Mobile-First: Base styles für kleinste Bildschirme
+mat-card {
+  padding: 10px 10px 5px 10px; // Mobile: kompakter Padding
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000050 !important;
+  color: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  
+  mat-card-title {
+    font-family: 'Methamorphous normal';
+    font-size: clamp(1.2rem, 6vw, 1.8rem); // Mobile: kleinere Schrift
+    color: red;
+  }
+  
+  mat-card-content {
+    padding: unset;
+    margin: 8px 0 0 0; // Mobile: kompakter Abstand
+    line-height: 1.3rem; // Mobile: engere Zeilenhöhe
+    font-size: clamp(1.4rem, 4vw, 1.6rem); // Mobile: kleinere Schrift
+  }
+}
+
+// Tablet Portrait (480px+)
+@media (min-width: 480px) {
+  mat-card {
+    padding: 15px 15px 8px 15px;
+    
+    mat-card-title {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+    
+    mat-card-content {
+      margin: 10px 0 0 0;
+      line-height: 1.4rem;
+      font-size: clamp(1.5rem, 3.5vw, 1.7rem);
+    }
+  }
+}
+
+// Tablet Landscape / Desktop (768px+)
+@media (min-width: 768px) {
+  mat-card {
+    padding: 20px; // Desktop: ursprünglicher Padding
+    
+    mat-card-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+    }
+    
+    mat-card-content {
+      margin: 10px 0 0 0;
+      line-height: 1.5rem; // Desktop: ursprüngliche Zeilenhöhe
+      font-size: 1.8rem; // Desktop: ursprüngliche Schriftgröße
+    }
+  }
+}
+
+// Large Desktop (1024px+)
+@media (min-width: 1024px) {
+  mat-card {
+    mat-card-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem); // Desktop: maximale Schriftgröße
+    }
+  }
+}
+
+@media (max-width: 400px), (max-height: 600px) {
+
+  mat-card {
+        padding:10px;
+    mat-card-title {
+      font-size: clamp(1.5rem, 2vw, 2rem); // Desktop: maximale Schriftgröße
     }
     mat-card-content{
-        padding: unset;
-        margin:10px 0 0 0;
-         line-height:1.5rem;
-        font-size: 1.8rem;
+      font-size:1.3rem;
     }
-
-    @media (max-height:800px), (max-width:400px){
-
-            padding:10px 10px 5px 10px; 
-        
-    }
-
+  }
 }

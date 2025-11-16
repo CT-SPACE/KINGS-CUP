@@ -63,13 +63,41 @@ app-root{
 }
 h1{
     font-family:'RibEyeMarrow normal', Courier, monospace;
-    font-size: 5rem;
+    font-size: clamp(1.0rem, 10vw, 2.6rem);
         line-height: 70px;
     color: white;
-
     text-align: center;
     margin-bottom: 2rem;
 
 }
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep .mat-mdc-dialog-container {
+  .mdc-dialog__surface {
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, #f3e7f3 0%, #e1bee1 100%) !important;
+    
+    .mat-mdc-dialog-title {
+      color: rgb(38, 38, 38);
+      font-family: 'RibEyeMarrow normal', Courier, monospace;
+      font-size: 1.5rem;
+    }
+    
+    .mat-mdc-dialog-content {
+      color: rgb(38, 38, 38);
+      font-family: 'RibEyeMarrow normal', Courier, monospace;
+    }
+    
+    .mat-mdc-button {
+      border-radius: 10px;
+      
+      &.mat-warn {
+        background-color: #f605ea;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,38 +1,38 @@
 @import "./../../styles.scss";
 
-
+// 1. BASE STYLES (Mobile First - kleinste Bildschirme)
+//
 .field {
   height: 2px;
   display: flex;
   justify-content: center;
-  position:relative;
-  z-index:1;
+  position: relative;
+  z-index: 1;
   align-items: center;
   background-image: linear-gradient(to top right, fuchsia, #5b4e5f);
   overflow: visible;
   width: 100vw;
-      border: 1px solid $cardColor-red;
+  border: 1px solid $cardColor-red;
+
   &.expand {
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 60vh;
-}
-}
-  @media (max-height:800px), (max-width:600px){
-  .field.expand{  
-    height: 70vh !important;
+    height: 60vh; // Mobile default
     position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
-    top: -30vh !important;
+    top: -30vh;
     display: flex;
     align-items: end;
   }
 }
-.title{
+
+
+.title {
   position: absolute;
-      top: clamp(-140px, -14vh, -200px) !important;
-  z-index:2;
+  top: clamp(-180px, -18vh, -130px);
+
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,76 +40,56 @@
   opacity: 0;
   transform: translateY(-100px) scale(0.8);
   transition: opacity 0.8s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
   &.fly-in {
     opacity: 1;
-     animation: flyIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: flyIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
-  > img {
-    top:8%;
+
+  >img {
+    top: 8%;
     width: 110px;
     height: auto;
     margin-bottom: -20px;
   }
-  > h1 {
-    top:10%;
-    font-size: 3rem;
+
+  >h1 {
+    top: 10%;
+    font-size: clamp(2rem, 8vw, 2.8rem);
     text-align: center;
     margin-bottom: 2rem;
-
-        @media (max-height:800px){
-                  font-size: clamp(2rem, 10vw, 3rem) !important;
-        }
-        @media (max-width: 400px){
-        font-size: clamp(2rem, 10vw, 3rem) !important;
-        line-height: normal;
-        padding:10px;
-       
-
-    }
+    line-height: normal;
+    padding: 10px;
   }
 }
 
 .card-container {
   display: flex;
-    position:relative;
-
+  position: relative;
   justify-content: center;
   align-items: center;
-  gap: clamp(50px, 10vw, 100px); // Responsive Abstand
-width:100vw;
- @media (max-height:800px){
-  margin-bottom: clamp(20px, 10vh, 100px) !important;
-  top:clamp(-30px, -14vh, -200px) !important
- }
-  @media (max-height:800px) and (max-width:600px){
-    margin-bottom: clamp(20px, 10vh, 100px) !important;
-   gap: clamp(20px,5vw, 50px); 
-    flex-direction:column;
-      top:clamp(-10px, -10vh, -80px) !important
-
- }
-//  @media (max-width:600px){
-//    gap: clamp(20px,5vw, 50px); 
-//     flex-direction:column;
-//       top:clamp(-100px, -14vh, -200px) !important
-
-//  }
-
+  width: 100vw;
+  gap: clamp(20px, 5vw, 40px);
+  flex-direction: column; // Mobile: vertikal gestapelt
+  // top: clamp(-60px, -8vh, -20px);
+  top: clamp(-20px, -2vh, -0px);
+  margin: auto;
 }
 
-.card-stack-area, .played-cards-area{
+.card-stack-area,
+.played-cards-area {
   position: relative;
   display: flex;
-  width:clamp(100px, 26vw, 220px) !important;
   aspect-ratio: 0.64;
   height: auto;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background: #e5b6e5d0;
+  background: #ab84abd0;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.125s ease;
-    &.topCard {
+  transition: transform 0.125s ease;
+
+  &.topCard {
     cursor: pointer;
     left: -400px;
     right: 30px;
@@ -117,203 +97,487 @@ width:100vw;
     border: 2px solid $cardColor-red;
     transform: rotate(5deg);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+
     &:hover {
       transform: rotate(-5deg) scale(1) translateY(-20px);
     }
+  }
+}
+
+.card-stack-area {
+  width: clamp(80px, 10vh, 130px); // Mobile sizes
 
 }
+
+.played-cards-area {
+  width: clamp(130px, 35vw, 200px); // Mobile sizes
 }
-    @media (max-width:600px){
-       .played-cards-area{
-         width:clamp(120px, 40vw, 220px) !important;
-       }
-       .card-stack-area{
-          width:clamp(100px, 20vw, 150px) !important;
-        left:-8vh;
-       }
-     
-    }
-      @media (max-height:800px) and (max-width:600px){
-       .played-cards-area{
-         width:clamp(100px, 30vw, 180px) !important;
-       }
-       }
- 
+
 .cardback {
   width: 100%;
   cursor: pointer;
   aspect-ratio: 0.64;
-  border-radius: 22px;
+  border-radius: 20px;
   position: absolute;
-  box-sizing:border-box;
+  box-sizing: border-box;
+  border: 1px solid red;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 
-  > img {
+  >img {
     width: 100%;
     height: 100%;
     position: absolute;
     border-radius: 20px;
   }
 }
-  .takeCard-Animation {
-    transition: all 125ms eas-in-out;
-  }
-#newCard{
- 
-    width: 220px;
+
+.takeCard-Animation {
+  transition: all 125ms eas-in-out;
+}
+
+#newCard {
+
+  width: clamp(100px, 35vw, 220px);
   aspect-ratio: 0.64;
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:10;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  border-radius:20px;
-
-}
-#newCard.pick{
-// transition: all 250ms ease-in-out;
-  animation: takeCardAnimation 0.5s ease-in-out forwards;
-    transform: scale(1) translateX(-360px) rotate(-3deg); 
-  > img{
-    position:absolute;
-    width:100%;
-    height:100%;
-    border-radius:20px;
-  }
-
-}
-  .pick-card{
-
-    transition: all 125ms eas-in-out; 
-    transform: rotate(-3deg);
-   
-    &:hover {
-  transform: translate(-10px, -12px) scale(1.05) rotate(8deg);
-   }
-  }
-
-   .playedCard{
-    position: absolute;
-    width:100% !important;
-    > img{
-      width:100%;
-      height:100%;
-      border-radius:20px;
-      box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    } 
-    @media (max-width:800px){
-      // right: -60px;
-    } 
-// transform: scale(1) translateX(-360px);
-   }
-.player-list{
-  display: flex;
-    position: absolute;
-    flex-direction: column;
-    justify-content: start;
-    width: 200px;
-    height: 80%;
-    right: 0;
-    z-index: 5;
-    align-items: end;
-    @media (max-height:800px){
-      top:-30vh;
-      width:150px !important;
-
-    }
-}
-
-.players{
-  margin: 10px 0 10px 10px;
-  @media(max-width:400px){
-    margin:5px 0 5px 5px;
-  }
-}
-
-.addPerson{
-
-    margin:20px;
-  position:absolute;
-    bottom:0;
-    right:0;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column-reverse;
-    img{
-      width:40px; 
-      height:40px; 
-      position:relative;
-      top:2px
-    }
-    .addIcon{
-      z-index:2;
-      position:absolute;
-      border:1px solid black; 
-      border-radius:50%;
-      background-color: white;
-      bottom:5px; 
-      right:5px
-    }
-@media (max-width: 800px) and (orientation: portrait){
-  top:-60px;
-}
-  }
-
-.pin-rule{
   position: absolute;
- bottom:-5px;
-  padding:10px;
- width:100%;
-box-sizing:border-box;
+  left: calc(-25vh - clamp(20px, 2.5vw, 40px));
+  //  left:-25vw;
+  top: 0;
+  z-index: 10;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+
+  >img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+  }
+
+}
+
+#newCard.pick {
+
+  animation: takeCardAnimation 0.5s ease-in-out forwards;
+  // transform: scale(1) translateX(clamp(20px, 5vw, 40px)) rotate(-3deg); 
+
+
+}
+
+.pick-card {
+
+  transition: all 125ms ease-in-out;
+  transform: rotate(-3deg);
+
+  &:hover {
+    transform: translate(-10px, -12px) scale(1.05) rotate(8deg);
+  }
+}
+
+.playedCard {
+  position: absolute;
+
+  width: 100% !important;
+
+  >img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.player-list {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: start;
+  width: 150px; // Mobile: schmaler
+  height: 80%;
+  right: 0;
+  top: -20vh; // Mobile: höher positioniert
+  z-index: 5;
+  align-items: end;
+}
+
+.players {
+  margin: 5px 0 5px 5px; // Mobile: kompakter
+}
+
+.addPerson {
+  margin: 20px;
+  position: absolute;
+  top: -60px; // Mobile: oben positioniert
+  right: 0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column-reverse;
+
+  >img {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 2px;
+  }
+
+  >.addIcon {
+    z-index: 2;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: white;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+.pin-rule {
+  position: fixed; // Mobile: immer fixiert
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
   background-color: unset;
   display: flex;
-
   justify-content: center;
-@media (max-width: 800px), (orientation: portrait){
-  
-    position: fixed !important;
-    bottom:0;
-  
-}
 }
 
-app-game-rule{
-        width: 80%;
-    max-width: 800px;
-    min-width: 200px;
-    @media (max-width: 800px){
-      width: 94vw !important;
-    }
+app-game-rule {
+  width: 94vw; // Mobile: fast Vollbreite
+  max-width: 800px;
+  min-width: 200px;
 }
-.displayNone{
-  display:none; 
+
+// 2. TABLET PORTRAIT (480px+)
+// @media (min-width: 480px) and (min-height:601px) {
+
+
+//   .title {
+//     top: clamp(-150px, -15vh, -180px);
+
+//     > h1 {
+//       font-size: clamp(2.2rem, 7vw, 3rem);
+//     }
+//   }
+// }
+//}
+
+.empty-stack-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin: 5px;
+  height: clamp(120px, 20vh, 200px);
+
+  >.reshuffle-btn,
+  .new-game-btn {
+    max-width: 90%;
+    font-size: clamp(0.5rem, 2vw, 1.2rem);
+    display: flex;
+    padding: 5px;
+    height: fit-content;
+    box-sizing: border-box;
+    width: 200px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background-color: unset;
+    border: 0.5px solid rgb(38, 38, 38);
+    font-family: 'RibEyeMarrow normal', Courier, monospace;
+    color: rgb(38, 38, 38);
+
+    &:hover {
+      background-color: #f605ea;
+    }
+
+    // mat-icon {
+    //   font-size: 20px;
+    //   display: block !important; // DEFAULT: Icons zeigen
+    // }
+    
+    // .newcards, .newgame {
+    //   display: none !important; // DEFAULT: Text verstecken
+    // }
+  }
 }
 
 
-  @keyframes flyIn {
-    0% {
-      transform: translateY(-200px) scale(0.8) rotate(3deg);
+// // 3. TABLET LANDSCAPE / SMALL DESKTOP (768px+)
+@media (min-width: 400px) {
+  .field.expand {
+    height: 70vh;
+    top: -30vh;
+  }
+
+  .card-container {
+    flex-direction: row; // Ab hier nebeneinander
+    gap: clamp(40px, 10vw, 80px);
+    top: clamp(-120px, -12vh, -40px);
+    margin: auto auto 10vh auto;
+  }
+
+  .card-stack-area,
+  .played-cards-area {
+    width: clamp(140px, 25vw, 200px);
+  }
+
+  .reshuffle-btn,
+  .new-game-btn {
+    mat-icon {
+      display: none !important; // Icons zeigen
     }
-    30%{
-      transform: translateY(20px) scale(1.1) rotate(-3deg);
-    }
-    100% {
-      transform: translateY(0) scale(1) rotate(0deg);
-    }
-  } 
-  @keyframes takeCardAnimation {
-    0% {
-      transform: scale(0.9) translateY(-10px) rotate(8deg);
-    }
-    50%{
-      transform: scale(1.05) translateY(-10px) rotate(8deg);
-    }
-    90%{
-      transform: scale(1.2) translateX(-280px) rotate(4deg);
-    }
-    100% {
-      transform: scale(1) translateX(-360px) rotate(-3deg);
+    
+    .newcards,
+    .newgame {
+      display: block !important; // Text auch zeigen
     }
   }
 
+  .title {
+    top: clamp(-160px, -15vh, -150px);
+
+    >h1 {
+      font-size: clamp(2.5rem, 6vw, 3.2rem);
+    }
+  }
+
+  .player-list {
+    width: 180px;
+    top: -25vh;
+  }
+
+  .players {
+    margin: 8px 0 8px 8px;
+  }
+
+  .addPerson {
+    bottom: 0;
+    top: auto;
+  }
+
+}
+
+
+// 4. DESKTOP (1024px+)
+@media (min-width: 800px) and (min-height:801px) {
+  .field.expand {
+    height: 70vh;
+    // top: clamp(-280px,-20vh, -180px);
+  }
+
+  .card-container {
+    gap: clamp(60px, 12vw, 100px);
+    top: clamp(-150px, -14vh, -60px);
+  }
+
+  .card-stack-area,
+  .played-cards-area {
+    width: clamp(180px, 22vw, 220px);
+  }
+
+    .reshuffle-btn,
+  .new-game-btn {
+    mat-icon {
+      display: none !important; // Icons verstecken
+    }
+    
+    .newcards,
+    .newgame {
+      display: block !important; // Nur Text zeigen
+    }
+  }
+
+  .title {
+    top: clamp(-200px, -14vh, -140px);
+
+    >h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .player-list {
+    width: 200px;
+    top: -30vh;
+  }
+
+  .players {
+    margin: 10px 0 10px 10px;
+  }
+}
+
+// 5. SPECIAL CASES - Nur wo wirklich nötig
+@media (max-height:800px) and (min-width:400px) {
+ 
+  .title {
+    top: -18vh !important;
+    gap: 10px !important;
+
+    //margin-top:clamp(24px, 4vh, 0px) !important;
+    >h1 {
+      font-size: clamp(1rem, 4vh, 2rem) !important;
+    }
+
+    >img {
+      width: clamp(60px, 8vh, 100px) !important;
+    }
+  }
+
+  .card-stack-area {
+    width: clamp(100px, 25vh, 220px) !important;
+
+  }
+
+  .reshuffle-btn,
+  .new-game-btn {
+    mat-icon {
+      display: none !important; // Icons verstecken (Platzmangel vertikal)
+    }
+    
+    .newcards,
+    .newgame {
+      font-size:clamp(0.5rem, 2vh, 1rem);
+      display: block !important; // Text zeigen
+    }
+  }
+
+  .played-cards-area {
+    width: clamp(100px, 25vh, 220px) !important;
+
+  }
+}
+
+@media (max-height:400px) and (min-width:600px) {
+  .title {
+    flex-direction: row-reverse;
+    align-items: center;
+
+    >h1 {
+      margin: 0;
+    }
+
+    >img {
+      margin: 0;
+    }
+  }
+
+
+
+  .card-container {
+    top: unset;
+  }
+
+  .cardback {
+    border-radius: 10px;
+
+    >img {
+      border-radius: 8px;
+    }
+  }
+
+   .reshuffle-btn,
+  .new-game-btn {
+    mat-icon {
+      display: block !important; // Icons zeigen
+    }
+    
+    .newcards,
+    .newgame {
+      display: none !important; // Text verstecken (sehr wenig Platz)
+    }
+  }
+
+  .addPerson {
+    top: 0;
+    bottom: unset;
+    position: fixed;
+    margin: 10px;
+  }
+
+  .player-list {
+    height: 100vh;
+    overflow-y: auto;
+
+  }
+
+  .players {
+    margin: 5px 0 5px 5px !important;
+  }
+}
+
+.displayNone {
+  display: none;
+}
+
+
+@keyframes flyIn {
+  0% {
+    transform: translateY(-200px) scale(0.8) rotate(3deg);
+  }
+
+  30% {
+    transform: translateY(20px) scale(1.1) rotate(-3deg);
+  }
+
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@media (max-width: 400px) {
+
+  .empty-stack-options {
+    gap: 10px;
+    height: 100%;
+  }
+
+ .reshuffle-btn,
+  .new-game-btn {
+    mat-icon {
+      height: 20px;
+      display: block !important; // Icons zeigen
+    }
+    
+    .newcards,
+    .newgame {
+      display: none !important; // Text verstecken
+    }
+  }
+
+
+@keyframes takeCardAnimation {
+  0% {
+    transform: scale(0.9) translateY(10px) rotate(8deg);
+  }
+
+  50% {
+    transform: scale(1.05) translateY(20px) rotate(5deg);
+  }
+
+  100% {
+    // Mobile: Bewegt sich vertikal nach unten statt horizontal
+    transform: scale(1) translateY(clamp(80px, 15vh, 120px)) rotate(-3deg);
+  }
+}
+}
+
+@keyframes takeCardAnimation {
+  0% {
+    transform: scale(0.9) translateY(20px) rotate(8deg);
+  }
+
+  50% {
+    transform: scale(1.05) translateY(30px) rotate(8deg);
+  }
+
+  90% {
+    transform: scale(1.2) translateX(clamp(60%, 50vw, 100%)) rotate(4deg);
+  }
+
+  100% {
+    transform: scale(1) translateX(clamp(80%, 70vw, 130%)) rotate(-3deg);
+  }
+}

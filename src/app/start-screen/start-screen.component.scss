@@ -1,81 +1,119 @@
 @import "./../../styles.scss";
 
-
-.start-screen{
-    max-width:400px ;  
-     background: linear-gradient(to bottom right,#a2193a, #391c09);
-    width:100%;
-     box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
-    aspect-ratio:1.57;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:center;
-    border: 1px solid $cardColor-red;
-    padding:2rem 0;
-    border-radius:20px;
-    >img{
-        width:260px;
-        height:auto;   
-    }
-    @media (max-height: 600px){
-        aspect-ratio:unset;
-        height:100vh;
-      
-    }
-    @media(max-width:400px){
-        aspect-ratio:unset;
-        max-width:unset;
-        width: 96vw;
-        >img{
-            width:clamp(100px,150px,260px);
-        }
-        }
+// Mobile-First: Base styles für kleinste Bildschirme
+.start-screen {
+  // Mobile: Vollbreite, ohne feste Dimensionen
+  aspect-ratio: unset;
+  width: 96vw;
+  max-width: unset;
+  background: linear-gradient(to bottom right, #a2193a, #391c09);
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $cardColor-red;
+  padding: 1.5rem 0; // Mobile: kompakter Padding
+  border-radius: 20px;
+  
+  > img {
+    width: clamp(180px, 50vw, 220px); // Mobile: responsive Bildgröße
+    height: auto;
+  }
 }
 
-.startgame{
-    font-family:'Methamorphous normal', sans-serif;
-    font-size:3rem;
-    color:white;
-    text-align:center;
-    margin:auto;
-    padding:2rem;
-    display: flex;
-        background-color: transparent;
-    border: transparent;
-
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    >img {
-
-        width:300px;
-        height:auto;   
+.startgame {
+  font-family: 'Methamorphous normal', sans-serif;
+  font-size: clamp(2rem, 8vw, 3rem); // Mobile: responsive Schrift
+  color: white;
+  text-align: center;
+  margin: 0; // Mobile: kein Margin
+  padding: 10px; // Mobile: kompakter Padding
+  display: flex;
+  background-color: transparent;
+  border: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  > img {
+    width: 200px; // Mobile: kleineres Bild
+    height: 80px;
+  }
+  
+  &:hover {
+    > img { 
+      filter: brightness(1.1); 
     }
-    &:hover{   
-        >img{  filter:brightness(1.1);}
-        cursor:pointer;
-        transition: all 0.3s ease-in-out;
-        } 
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+}
 
-    @media (max-width:400px){
-        font-size:clamp(2rem,8vw,3rem);
-        margin:0;
-        padding:10px;
-        >img{
-            width:200px;
-            height:80px
-        }   
+h2 {
+  font-family: 'ArchitectsDaughter normal', sans-serif;
+  position: absolute;
+  margin-bottom: 15px;
+  font-size: clamp(24px, 6vw, 30px); // Mobile: responsive Schrift
+  color: #9f4a0e;
+}
+
+// Tablet Portrait (480px+)
+@media (min-width: 480px) {
+  .start-screen {
+    width: 90vw;
+    padding: 1.8rem 0;
+    
+    > img {
+      width: clamp(200px, 45vw, 240px);
     }
+  }
+  
+  .startgame {
+    padding: 15px;
+    
+    > img {
+      width: 220px;
+      height: 90px;
+    }
+  }
 }
-h2{
-    font-family:'ArchitectsDaughter normal', sans-serif;
-    position: absolute;
-   margin-bottom: 15px;
-    font-size: 30px;
-    color: #9f4a0e;
-    @media (max-width:400px){
-        font-size:clamp(30px,6vw,30px);
-    }   
+
+// Tablet Landscape / Small Desktop (768px+)
+@media (min-width: 768px) {
+  .start-screen {
+    max-width: 400px; // Desktop: ursprüngliche max-width
+    width: 100%;
+    aspect-ratio: 1.57; // Desktop: ursprüngliches aspect-ratio
+    padding: 2rem 0; // Desktop: ursprünglicher Padding
+    
+    > img {
+      width: 260px; // Desktop: ursprüngliche Bildgröße
+    }
+  }
+  
+  .startgame {
+    font-size: 3rem; // Desktop: ursprüngliche Schriftgröße
+    margin: auto; // Desktop: ursprünglicher Margin
+    padding: 2rem; // Desktop: ursprünglicher Padding
+    
+    > img {
+      width: 300px; // Desktop: ursprüngliche Bildgröße
+      height: auto;
+    }
+  }
+  
+  h2 {
+    font-size: 30px; // Desktop: ursprüngliche Schriftgröße
+  }
 }
+
+// Special Cases
+@media (max-height: 600px) {
+  .start-screen {
+    aspect-ratio: unset;
+    height: 100vh;
+  }
+}
+
 

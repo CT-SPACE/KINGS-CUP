@@ -12,40 +12,29 @@
         <img class="logo" src="assets/img/logo.png">
         <h1>KING'S&nbsp;CUP</h1>
     </div>
-    <!-- <div class="card-stack">
-        <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
-            *ngFor="let c of game?.stackCount; let i = index;">
-            <img src="assets/img/cardbackside.png">
-        </div>
-        <div style="right:25px" (click)="takeCard()" class="cardback pick-card">
-            <img src="assets/img/cardbackside.png">
-        </div>
-        <div id="playedCards" *ngFor="let card of game?.playedCards; let i = index"
-            [style.transform]="'scale(1) translateX(-360px) rotate(' + getRandomRotation(i) + 'deg)'"
-            class="playedCard">
-            <img src="assets/img/cards/{{ card }}">
 
-        </div>
-        <div id="newCard" *ngIf="takeCardAnimation" [class.pick]="takeCardAnimation" (click)="takeCard()">
-            <img src="assets/img/cards/{{ currentCard }}">
-
-
-            
-        </div>
-
-
-    </div> -->
-
-    <!-- Ändere die HTML-Struktur minimal -->
 <div class="card-container">
   <div class="card-stack-area">
+    <div *ngIf="stackCount.length === 0" class="empty-stack-options">
+    <button mat-raised-button color="primary" (click)="reshuffleCards()" class="reshuffle-btn">
+      <mat-icon>shuffle</mat-icon>
+      <span class="newcards">Keep&nbsp;Playing!</span>
+    </button>
+    <button mat-raised-button color="warn" (click)="startNewGame()" class="new-game-btn">
+      <mat-icon>refresh</mat-icon>
+     <span class="newgame">NEW&nbsp;GAME</span> 
+    </button>
+  </div>
     <div class="cardback" [ngStyle]="{'right.px':i*2,'top.px':i*-1}"
-        *ngFor="let c of game?.stackCount; let i = index;">
+        *ngFor="let c of stackCount; let i = index;">
       <img src="assets/img/cardbackside.png">
     </div>
-    <div style="right:25px" (click)="takeCard()" class="cardback pick-card">
-      <img src="assets/img/cardbackside.png">
-    </div>
+<div style="right:25px" 
+     *ngIf="stackCount.length > 0"
+     (click)="takeCard()" 
+     class="cardback pick-card">
+  <img src="assets/img/cardbackside.png">
+</div>
   </div>
   
   <div class="played-cards-area">
@@ -54,7 +43,12 @@
         class="playedCard">
       <img src="assets/img/cards/{{ card }}">
     </div>
-  </div>
+
+
+  <div id="newCard" *ngIf="takeCardAnimation" [class.pick]="takeCardAnimation" (click)="takeCard()">
+      <img src="assets/img/cards/{{ currentCard }}">
+</div>
+</div>
 </div>
     <div class="pin-rule">
 <app-game-rule [card]="currentCard"></app-game-rule>
