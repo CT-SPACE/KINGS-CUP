@@ -1,10 +1,6 @@
-<div class="player-list">
+<div class="player-list" >
     <app-player *ngFor="let player of game?.players; let i = index" [ngStyle]="{'top.px': 350 + (i * 80)}"
-      [playerActive]="i == game?.currentPlayer"  [name]="player" class="players"></app-player>
-    <!-- <button mat-fab color="--mdc-fab-container-color"
-        class="addPerson" (click)="openDialog()"> <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addBeer">
-        <mat-icon class="addIcon">add</mat-icon>
-    </button> -->
+      [playerActive]="i == game?.currentPlayer"  [name]="player" class="players hide-mobile"></app-player>
 
 </div>
 <div class="field" [ngClass]="{ 'expand': isExpanded }">
@@ -53,7 +49,7 @@
     <div class="pin-rule">
 <app-game-rule [card]="currentCard"></app-game-rule>
     <button mat-fab color="--mdc-fab-container-color"
-        class="addPerson" (click)="openDialog()"> <img src="assets/img/pint-of-empty.svg" alt="Add Player" class="addBeer">
+        class="addPerson" (click)="openDialog()"> <img src="assets/img/beer_empty.svg" alt="Add Player" class="addBeer">
         <mat-icon class="addIcon">add</mat-icon>
     </button></div>
 </div>
