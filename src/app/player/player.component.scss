@@ -1,21 +1,26 @@
 @import "./../../styles.scss";
 
 // Mobile-First: Base styles für kleinste Bildschirme
-.player {
-  background-color: #ffffff50;
-  width: max-content; // Mobile: kompakte Breite
-  height: 30px; // Mobile: niedrigere Höhe
-  padding: 5px 10px 5px 5px; // Mobile: kompakter Padding
-  display: flex;
-  align-items: center;
-  gap: 10px; // Mobile: kleinerer Gap
-  border-radius: 10px 0 0 10px;
+// .player {
+//   background-color: #ffffff50;
+//   width: max-content; // Mobile: kompakte Breite
+//   height: 30px; // Mobile: niedrigere Höhe
+//   padding: 5px 10px 5px 5px; // Mobile: kompakter Padding
+//   display: flex;
+//   align-items: center;
+//   gap: 10px; // Mobile: kleinerer Gap
+//   border-radius: 10px 0 0 10px;
   
-  span {
-    font-size: clamp(0.8rem, 4vw, 1.2rem); // Mobile: kleinere Schrift
-    font-weight: 600;
-    color: rebeccapurple;
-  }
+//   span {
+//     font-size: clamp(0.8rem, 4vw, 1.2rem); // Mobile: kleinere Schrift
+//     font-weight: 600;
+//     color: rebeccapurple;
+//   }
+
+  
+  // .players {
+  //   margin: 10px 0 10px 10px;
+  // }
   
   .player-name {
     font-size: clamp(1rem, 5vw, 1.5rem); // Mobile: kleinere Schrift
@@ -40,7 +45,7 @@
       object-fit: contain;
     }
   }
-}
+
 
 .player-active {
   background-color: #ffffff;
@@ -49,76 +54,24 @@
   transition: all 0.3s ease-in-out;
 }
 
-// Tablet Portrait (480px+)
-@media (min-width: 480px) {
-  .player {
-    width: 200px; // Tablet: mittlere Breite
-    height: 35px;
-    padding: 7px 12px 7px 7px;
-    gap: 12px;
-    
-    span {
-      font-size: clamp(0.9rem, 3vw, 1.3rem);
-    }
-    
-    .player-name {
-      font-size: clamp(1.1rem, 4vw, 1.7rem);
-    }
-    
-    .iconCircle {
-      width: 35px;
-      height: 35px;
-      padding: 3px 4px 4px 3px;
-      margin-left: 7px;
-    }
-  }
-}
 
 // Desktop (768px+)
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .player {
     width: 250px; // Desktop: ursprüngliche Breite
     height: 40px; // Desktop: ursprüngliche Höhe
     padding: 10px; // Desktop: ursprünglicher Padding
     gap: 15px; // Desktop: ursprünglicher Gap
-    
-    span {
-      font-size: clamp(1rem, 2vw, 1.5rem); // Desktop: ursprüngliche Werte
-    }
-    
+        
     .player-name {
       font-size: clamp(1.2rem, 3vw, 2rem); // Desktop: ursprüngliche Werte
     }
     
-    .iconCircle {
+    .iconPennant {
       width: 40px; // Desktop: ursprüngliche Größe
       height: 40px;
       padding: 4px 5px 5px 4px; // Desktop: ursprünglicher Padding
       margin-left: 0; // Desktop: kein extra Margin
     }
-  }
-}
-
-@media (max-height:400px) and (min-width:600px){
-  .player {
-    width:unset;
-    height: 24px; // Desktop: ursprüngliche Höhe
-    padding: 5px; // Desktop: ursprünglicher Padding
-    gap: 10px; // Desktop: ursprünglicher Gap
-    
-    span {
-      font-size: clamp(1rem, 2vw, 1.5rem) !important; // Desktop: ursprüngliche Werte
-    }
-    
-    // .player-name {
-    //   font-size: clamp(1.2rem, 3vw, 2rem); // Desktop: ursprüngliche Werte
-    // }
-        .iconCircle {
-      width: 28px; // Desktop: ursprüngliche Größe
-      height: 28px;
-      padding:1px 3px 2px 3px; // Desktop: ursprünglicher Padding
-      margin-left: 0; // Desktop: kein extra Margin
-    }
-
   }
 }

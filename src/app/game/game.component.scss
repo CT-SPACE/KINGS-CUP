@@ -17,13 +17,14 @@
   &.expand {
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
     height: 60vh; // Mobile default
+    flex-direction:column;
     position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
     top: -30vh;
     display: flex;
-    align-items: end;
+    align-items: center;
   }
 }
 
@@ -70,7 +71,7 @@
   align-items: center;
   width: 100vw;
   gap: clamp(20px, 5vw, 40px);
-  flex-direction: column; // Mobile: vertikal gestapelt
+  // flex-direction: column; // Mobile: vertikal gestapelt
   // top: clamp(-60px, -8vh, -20px);
   top: clamp(-20px, -2vh, -0px);
   margin: auto;
@@ -187,23 +188,22 @@
   }
 }
 
-.player-list {
+
+
+
+.player-list-mobile {
   display: flex;
   position: absolute;
-  flex-direction: column;
-  justify-content: start;
-  width: 150px; // Mobile: schmaler
-  height: 80%;
-  right: 0;
-  top: -20vh; // Mobile: höher positioniert
+  width: 100vw;
+  top: 0px;
   z-index: 5;
+  gap: 4px;
   align-items: end;
-}
+  margin-left: 6px;
+  justify-content: flex-start; 
+  padding: 0;
 
-.players {
-  margin: 5px 0 5px 5px; // Mobile: kompakter
 }
-
 .addPerson {
   margin: 20px;
   position: absolute;
@@ -217,28 +217,35 @@
   >.addIcon {
     z-index: 2;
     position: absolute;
-    border: 1px solid black;
-    border-radius: 50%;
-    background-color: white;
-    bottom: 5px;
-    right: 5px;
+    left: 2px;
+    // border: 1px solid black;
+    // border-radius: 50%;
+    // background-color: white;
+    // bottom: 5px;
+    // right: 5px;
   }
 }
-
-  .addBeer {
-    width: 40px;
-    height: 40px;
-    position: relative;
+span.mdc-button__label{
+  height:32px !important;
+}
+img#addBeer {
+    width: 32px !important;
+    height: 34px !important;
+right: 2px;
+    bottom: 10px;
+    position: absolute;
   }
+
+
 
 .pin-rule {
   position: fixed; // Mobile: immer fixiert
+  display:flex;
   bottom: 0;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
   background-color: unset;
-  display: flex;
   justify-content: center;
 }
 
@@ -292,17 +299,19 @@ app-game-rule {
     &:hover {
       background-color: #f605ea;
     }
+  }
 
-    // mat-icon {
-    //   font-size: 20px;
-    //   display: block !important; // DEFAULT: Icons zeigen
-    // }
+    mat-icon {
+      font-size: 20px;
+      border:unset;
+      display: block !important; // DEFAULT: Icons zeigen
+    }
     
     // .newcards, .newgame {
     //   display: none !important; // DEFAULT: Text verstecken
     // }
   }
-}
+
 
 
 // // 3. TABLET LANDSCAPE / SMALL DESKTOP (768px+)
@@ -310,6 +319,7 @@ app-game-rule {
   .field.expand {
     height: 70vh;
     top: -30vh;
+    align-items:center;
   }
 
   .card-container {
@@ -344,14 +354,14 @@ app-game-rule {
     }
   }
 
-  .player-list {
-    width: 180px;
-    top: -25vh;
-  }
+  // .player-list {
+  //   width: 180px;
+  //   top: -25vh;
+  // }
 
-  .players {
-    margin: 8px 0 8px 8px;
-  }
+  // .players {
+  //   margin: 8px 0 8px 8px;
+  // }
 
   .addPerson {
     bottom: 0;
@@ -362,11 +372,24 @@ app-game-rule {
 
 
 // 4. DESKTOP (1024px+)
-@media (min-width: 800px) and (min-height:801px) {
+@media (min-width: 769px) and (min-height:801px) {
   .field.expand {
     height: 70vh;
-    // top: clamp(-280px,-20vh, -180px);
+    top: -30vh;
   }
+
+  .player-list {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: start;
+  width: 150px; // Mobile: schmaler
+  height: 80%;
+  right: 0;
+  top: -20vh; // Mobile: höher positioniert
+  z-index: 5;
+  align-items: center;
+}
 
   .card-container {
     gap: clamp(60px, 12vw, 100px);
@@ -403,9 +426,6 @@ app-game-rule {
     top: -30vh;
   }
 
-  .players {
-    margin: 10px 0 10px 10px;
-  }
 }
 
 // 5. SPECIAL CASES - Nur wo wirklich nötig
@@ -447,9 +467,18 @@ app-game-rule {
     width: clamp(100px, 25vh, 220px) !important;
 
   }
+  .field.expand{
+    height:70vh;
+    top:-10vh;
+  }
 }
 
+
 @media (max-height:400px) and (min-width:600px) {
+  .field.expand{
+    height:70vh;
+    top:5vh;
+  }
   .title {
     flex-direction: row-reverse;
     align-items: center;
@@ -467,6 +496,7 @@ app-game-rule {
 
   .card-container {
     top: unset;
+    margin: auto auto 10vh auto;
   }
 
   .cardback {
@@ -496,16 +526,17 @@ app-game-rule {
     margin: 10px;
   }
 
-  .player-list {
-    height: 100vh;
-    overflow-y: auto;
+  // .player-list {
+  //   height: 100vh;
+  //   overflow-y: auto;
 
-  }
+  // }
 
   .players {
     margin: 5px 0 5px 5px !important;
   }
 }
+
 
 .displayNone {
   display: none;
@@ -523,6 +554,26 @@ app-game-rule {
 
   100% {
     transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+
+
+@keyframes takeCardAnimation {
+  0% {
+    transform: scale(0.9) translateY(20px) rotate(8deg);
+  }
+
+  50% {
+    transform: scale(1.05) translateY(30px) rotate(8deg);
+  }
+
+  90% {
+    transform: scale(1.2) translateX(clamp(60%, 50vw, 100%)) rotate(4deg);
+  }
+
+  100% {
+    transform: scale(1) translateX(clamp(80%, 70vw, 130%)) rotate(-3deg);
   }
 }
 
@@ -547,7 +598,7 @@ app-game-rule {
   }
 
 
-@keyframes takeCardAnimation {
+@keyframes takeCardAnimationMobile {
   0% {
     transform: scale(0.9) translateY(10px) rotate(8deg);
   }
@@ -561,22 +612,4 @@ app-game-rule {
     transform: scale(1) translateY(clamp(80px, 15vh, 120px)) rotate(-3deg);
   }
 }
-}
-
-@keyframes takeCardAnimation {
-  0% {
-    transform: scale(0.9) translateY(20px) rotate(8deg);
-  }
-
-  50% {
-    transform: scale(1.05) translateY(30px) rotate(8deg);
-  }
-
-  90% {
-    transform: scale(1.2) translateX(clamp(60%, 50vw, 100%)) rotate(4deg);
-  }
-
-  100% {
-    transform: scale(1) translateX(clamp(80%, 70vw, 130%)) rotate(-3deg);
-  }
 }

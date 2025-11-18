@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerComponent } from '../player/player.component';
+import { PlayerMobileComponent } from '../player-mobile/player-mobile.component';
 // import { CardsComponent } from './cards/cards.component';
 import { Game } from './../../models/game';
 
@@ -31,6 +32,7 @@ import { AlertDialogComponent, ConfirmDialogComponent } from '../app-alert-dialo
     GameRuleComponent,
     CommonModule,
     PlayerComponent,
+    PlayerMobileComponent,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -43,6 +45,7 @@ import { AlertDialogComponent, ConfirmDialogComponent } from '../app-alert-dialo
 })
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
+  takeCardAnimationMobile = false;
   isExpanded = false;
   showTitle = false;
   game: Game | undefined;
@@ -167,7 +170,7 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (this.takeCardAnimation) return;
+    if (this.takeCardAnimation || this.takeCardAnimation) return;
     if (this.game?.players.length! < 2) {
           this.dialog.open(AlertDialogComponent, {
       width: '300px',
@@ -182,6 +185,7 @@ export class GameComponent implements OnInit {
     if (this.game && this.game.stack.length > 0) {
       this.currentCard = this.game.stack.pop() || '';
       this.takeCardAnimation = true;
+      this.takeCardAnimationMobile = true;
       this.game.currentPlayer =
         (this.game.currentPlayer + 1) % this.game.players.length;
 
@@ -189,6 +193,7 @@ export class GameComponent implements OnInit {
         if (this.currentCard) {
           const cardToAdd = this.currentCard;
           this.takeCardAnimation = false;
+          this.takeCardAnimationMobile = false;
           this.game?.playedCards.push(cardToAdd);
         }
 
@@ -291,4 +296,6 @@ export class GameComponent implements OnInit {
    }
   });
 }
+
+
 }
