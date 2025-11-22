@@ -1,0 +1,123 @@
+// .profilepicture{
+//     width: 50px;
+//     height: 50px;
+//     margin: 10px;
+//     border-radius: 100%;
+//     cursor: pointer;
+
+
+// }
+
+.edit-player-icon{
+    width:30px;
+    height:30px;
+    border:1px solid rebeccapurple;
+    border-radius:100%;
+    padding:3px;
+    &:hover{
+        filter: brightness(1.1);
+        box-shadow: 0 0 10px 2px rebeccapurple;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.player-dialog {
+  min-width: 400px;
+  max-width: 90vw;
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .profile-selection {
+    margin: 20px 0;
+    
+    h3 {
+      margin-bottom: 15px;
+      color: rgb(38, 38, 38);
+      font-family: 'RibEyeMarrow normal', Courier, monospace;
+    }
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .profile-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: #f605ea;
+      transform: scale(1.1);
+    }
+    
+    &.selected {
+      border-color: #f605ea;
+      box-shadow: 0 0 10px rgba(246, 5, 234, 0.5);
+      transform: scale(1.1);
+    }
+  }
+
+  .player-preview {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(246, 5, 234, 0.1);
+    border-radius: 10px;
+    
+    h4 {
+      margin-bottom: 10px;
+      color: rgb(38, 38, 38);
+      font-family: 'RibEyeMarrow normal', Courier, monospace;
+    }
+  }
+
+  .preview-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .preview-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .preview-name {
+    font-family: 'RibEyeMarrow normal', Courier, monospace;
+    font-size: 1.1rem;
+    color: rgb(38, 38, 38);
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 480px) {
+  .player-dialog {
+    min-width: 320px;
+    
+    .profile-grid {
+      grid-template-columns: repeat(4, 1fr);
+      max-height: 150px;
+    }
+    
+    .profile-option {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

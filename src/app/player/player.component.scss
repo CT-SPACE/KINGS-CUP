@@ -10,6 +10,13 @@
   align-items: center;
   gap: 10px; // Mobile: kleinerer Gap
   border-radius: 10px 0 0 10px;
+  &:hover{
+    cursor: pointer;
+    background-color: fuchsia;
+    color:white;
+    box-shadow: 0 0 10px 2px rebeccapurple;
+    transition: all 0.3s ease-in-out;
+  }
   
   span {
     font-size: clamp(0.8rem, 4vw, 1.2rem); // Mobile: kleinere Schrift

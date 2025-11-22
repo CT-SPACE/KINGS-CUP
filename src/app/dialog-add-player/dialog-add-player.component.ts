@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,6 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -19,6 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 export class DialogAddPlayerComponent {
   name: string = '';
 
+constructor(
+  @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', playerData?: any }
+) {}
 
   
 }

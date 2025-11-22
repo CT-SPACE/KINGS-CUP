@@ -1,6 +1,14 @@
 <div class="player-list" >
-    <app-player *ngFor="let player of game?.players; let i = index" [ngStyle]="{'top.px': 350 + (i * 80)}"
-      [playerActive]="i == game?.currentPlayer"  [name]="player" class="players hide-mobile"></app-player>
+    <app-player 
+    *ngFor="let player of game?.players; let i = index" 
+            [ngStyle]="{'top.px': 350 + (i * 80)}"
+            [playerActive]="i == game?.currentPlayer" 
+            [name]="player"
+            [playerIndex]="i"
+            [playerImage]="game?.playerImages?.[i] || 'beer.svg'"
+            (playerClicked)="editPlayer($event)"
+            class="players">
+  </app-player>
 
 </div>
 <div class="field" [ngClass]="{ 'expand': isExpanded }">

@@ -19,10 +19,10 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 import { GameRuleComponent } from '../game-rule/game-rule.component';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore, getDoc } from '@angular/fire/firestore';
-// import { Observable } from 'rxjs';
 import { collection, addDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertDialogComponent, ConfirmDialogComponent } from '../app-alert-dialog/app-alert-dialog.component';
+import { EditPlayerComponent, PlayerDialogData } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -37,6 +37,7 @@ import { AlertDialogComponent, ConfirmDialogComponent } from '../app-alert-dialo
     FormsModule,
     MatFormFieldModule,
     MatDialogModule
+  
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -53,6 +54,8 @@ export class GameComponent implements OnInit {
   gameId: string = '';
   route = inject(ActivatedRoute);
   router = inject(Router);
+  private editPlayerComponentRef = EditPlayerComponent;
+
 
   get gamesCollection() {
     return collection(this.firestore, 'game');
@@ -75,6 +78,8 @@ export class GameComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
+  
+
     setTimeout(() => {
       this.isExpanded = true;
     }, 200);
@@ -129,6 +134,7 @@ export class GameComponent implements OnInit {
             // Game-Objekt aus Firestore-Daten rekonstruieren
             this.game = new Game();
             this.game.players = gameData['players'] || [];
+            this.game.playerImages = gameData['playerImages'] || [];
             this.game.currentPlayer = gameData['currentPlayer'] || 0;
             this.game.playedCards = gameData['playedCards'] || [];
 
@@ -142,6 +148,7 @@ export class GameComponent implements OnInit {
 
             console.log('Game loaded from Firestore:', this.gameId);
           } else {
+            this.currentCard = '';
             console.log('Game not found, creating new one');
             this.newGame();
           }
@@ -208,25 +215,26 @@ export class GameComponent implements OnInit {
     return ((index * 7) % 12) - 6;
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
-      autoFocus: 'dialog',
-    });
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
+  //     autoFocus: 'dialog',
+  //   });
 
-    dialogRef.afterClosed().subscribe((name: string) => {
-      if (name && name.trim() !== '') {
-        this.game?.players.push(name);
+  //   dialogRef.afterClosed().subscribe((name: string) => {
+  //     if (name && name.trim() !== '') { 
+  //       this.game?.players.push(name);
+  //       this.game?.playerImages.push('beer.svg'); 
 
-        if (this.game && this.game.players.length >= 2) {
-          if (this.gameId === '') {
-            this.saveNewGameToFirestore();
-          } else {
-            this.updateGameInFirestore();
-          }
-        }
-      }
-    });
-  }
+  //       if (this.game && this.game.players.length >= 2) {
+  //         if (this.gameId === '') {
+  //           this.saveNewGameToFirestore();
+  //         } else {
+  //           this.updateGameInFirestore();
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
   /**
    * Mischt alle gespielten Karten neu und fügt sie dem Stapel hinzu
    */
@@ -251,27 +259,19 @@ export class GameComponent implements OnInit {
     if (this.gameId) {
       this.updateGameInFirestore();
     }
-
-    console.log(
-      `Karten neu gemischt! ${allCards.length} Karten zurück im Stapel.`
-    );
   }
 
   /**
    * Startet ein komplett neues Spiel
    */
   startNewGame() {
-     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    width: '400px',
-    data: {
-      title: 'Neues Spiel starten',
-      message: 'Möchtest du wirklich ein neues Spiel starten? Der aktuelle Spielstand geht verloren.',
-      confirmText: 'Neues Spiel'
-    }
-  });
+     const confirmed = confirm(
 
-      dialogRef.afterClosed().subscribe(result => {
-    if (result === true)  {
+      
+  );
+
+
+    if (confirmed)  {
       // Spieler behalten, aber neues Spiel
       const currentPlayers = this.game?.players || [];
 
@@ -285,10 +285,89 @@ export class GameComponent implements OnInit {
       if (currentPlayers.length >= 2) {
         this.saveNewGameToFirestore(); // ✅ Erstellt neue Firestore-Dokument
       }
-      // Falls weniger als 2 Spieler: Warte bis genügend Spieler da sind (openDialog macht dann saveNewGameToFirestore)
-
-      console.log('Neues Spiel gestartet!');
    }
-  });
-}
-}
+  }
+  
+  // editPlayer(playerId: number){
+  //   console.log('Edit player', playerId);
+  //   const dialogRef = this.dialog.open(this.editPlayerComponentRef);
+  //   dialogRef.afterClosed().subscribe((change: string) => {
+  //     console.log("received change:", change);
+  //   })
+  // }
+
+
+  // ✅ ERSETZT: Alte openDialog() durch neue Implementierung
+  openDialog(): void {
+    const dialogRef = this.dialog.open(this.editPlayerComponentRef, {
+      width: '500px',
+      data: { 
+        mode: 'add' as const
+      } as PlayerDialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.name) {
+        // Spieler hinzufügen mit Bild
+        this.game?.players.push(result.name);
+        
+        // // ✅ NEU: Player Images Array erweitern
+        // if (!this.game) {
+        //   this.game.playerImages = [];
+        // }
+
+
+        if (!this.game?.playerImages) {
+        this.game!.playerImages = [];
+      }
+      this.game!.playerImages.push(result.image);
+
+        // Firebase Update
+        if (this.game?.players.length === 2) {
+          this.saveNewGameToFirestore();
+        } else if (this.gameId) {
+          this.updateGameInFirestore();
+        }
+
+        console.log('Player added:', result.name, 'with image:', result.image);
+      }
+    });
+  }
+
+  // ✅ NEU: Edit Player Methode
+  editPlayer(playerIndex: number): void {
+    if (!this.game?.players[playerIndex]) return;
+
+    const dialogRef = this.dialog.open(this.editPlayerComponentRef, {
+      width: '500px',
+      data: { 
+        mode: 'edit' as const,
+        playerName: this.game.players[playerIndex],
+        playerImage: this.game.playerImages?.[playerIndex] || 'beer.svg',
+        playerIndex: playerIndex
+      } as PlayerDialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result || !result.name || !this.game) {
+        return;
+      }
+        // Spieler bearbeiten
+        this.game.players[playerIndex] = result.name;
+        
+        // Player Image aktualisieren
+        if (!this.game.playerImages) {
+          this.game.playerImages = [];
+        }
+        this.game.playerImages[playerIndex] = result.image;
+
+        // Firebase Update
+        if (this.gameId) {
+          this.updateGameInFirestore();
+        }
+
+        console.log('Player updated:', result.name, 'with image:', result.image);
+      });
+    }
+  }
+

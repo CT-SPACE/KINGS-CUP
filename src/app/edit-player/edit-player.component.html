@@ -1,0 +1,50 @@
+<!-- <img class="profilepicture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="assets/img/profile-pictures/{{ picture }}" alt="Player Icon" class="edit-player-icon"> -->
+
+<div class="player-dialog">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+  
+  <mat-dialog-content>
+    <!-- Name Input -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Spieler Name</mat-label>
+      <input matInput 
+             [(ngModel)]="playerName" 
+             placeholder="Name eingeben..."
+             maxlength="20">
+    </mat-form-field>
+
+    <!-- Profile Picture Selection -->
+    <div class="profile-selection">
+      <h3>Profilbild auswählen:</h3>
+      <div class="profile-grid">
+        <img *ngFor="let picture of allProfilePictures" 
+             [src]="'assets/img/profile-pictures/' + picture"
+             [class.selected]="selectedImage === picture"
+             (click)="selectImage(picture)"
+             class="profile-option"
+             alt="Profile Picture">
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="player-preview">
+      <h4>Vorschau:</h4>
+      <div class="preview-player">
+        <img [src]="'assets/img/profile-pictures/' + selectedImage" 
+             class="preview-image" 
+             alt="Preview">
+        <span class="preview-name">{{ playerName || 'Spieler Name' }}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Abbrechen</button>
+    <button mat-raised-button 
+            color="primary" 
+            [disabled]="!playerName.trim()"
+            (click)="onSave()">
+      {{ isEditMode ? 'Speichern' : 'Hinzufügen' }}
+    </button>
+  </mat-dialog-actions>
+</div>
