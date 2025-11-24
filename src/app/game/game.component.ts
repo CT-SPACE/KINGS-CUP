@@ -36,14 +36,14 @@ import { EditPlayerComponent, PlayerDialogData } from '../edit-player/edit-playe
     MatFormFieldModule,
     FormsModule,
     MatFormFieldModule,
-    MatDialogModule
-  
+
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
+  isFullscreen = false;
   isExpanded = false;
   showTitle = false;
   game: Game | undefined;
@@ -78,7 +78,9 @@ export class GameComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-  
+  document.addEventListener('fullscreenchange', () => {
+  this.isFullscreen = !!document.fullscreenElement;
+});
 
     setTimeout(() => {
       this.isExpanded = true;
@@ -96,18 +98,25 @@ export class GameComponent implements OnInit {
     }
   }
 
+  toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().then(() => {
+      this.isFullscreen = true;
+    }).catch(err => {
+      console.log('Fehler beim Aktivieren des Vollbildmodus:', err);
+    });
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().then(() => {
+        this.isFullscreen = false;
+      });
+    }
+  }
+}
   newGame() {
     this.game = new Game();
     this.gameId = '';
 
-    // addDoc(this.gamesCollection, this.game.toJSON())
-    //   .then((docRef) => {
-    //     this.gameId = docRef.id;
-    //     console.log('New game created with Firestore ID:', this.gameId);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error creating game:', error);
-    //   });
   }
 
   saveNewGameToFirestore() {

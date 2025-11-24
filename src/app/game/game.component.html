@@ -1,3 +1,11 @@
+<button mat-mini-fab 
+        color="accent" 
+        (click)="toggleFullscreen()" 
+        class="fullscreen-btn"
+        [attr.aria-label]="isFullscreen ? 'Vollbild beenden' : 'Vollbild aktivieren'">
+  <mat-icon>{{ isFullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+</button>
+
 <div class="player-list" >
     <app-player 
     *ngFor="let player of game?.players; let i = index" 

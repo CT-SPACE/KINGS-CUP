@@ -7,13 +7,14 @@
 
 
 </div> -->
-<div class="player" (click)="onPlayerClick()">
-  <span class="player-name">{{ name }}</span>
-  
-  <div class="iconPennant">
+<div class="player" [class.player-active]="playerActive" (click)="onPlayerClick()">
+    <div class="iconPennant">
     <!-- ✅ Spieler Bild verwenden -->
     <img [src]="'assets/img/profile-pictures/' + (playerImage || 'beer.svg')" 
          class="playerIMG" 
          alt="Player Avatar">
   </div>
+  <span class="player-name">{{ name }}</span>
+  
+
 </div>

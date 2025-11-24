@@ -1,7 +1,17 @@
 @import "./../../styles.scss";
 
 // 1. BASE STYLES (Mobile First - kleinste Bildschirme)
-
+.fullscreen-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+  }
+}
 
 .field {
   height: 2px;

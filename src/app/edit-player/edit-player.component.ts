@@ -33,7 +33,7 @@ allProfilePictures: string[] = ['beer.svg','can.svg','champagner.svg', 'cocktail
 selectedPicture = this.allProfilePictures[0];
 
 playerName: string = '';
-  selectedImage: string = 'profile-1.png';
+  selectedImage: string = 'beer.svg';
   
   // UI properties
   isEditMode: boolean = false;
@@ -50,7 +50,7 @@ playerName: string = '';
     
     if (this.isEditMode && this.data.playerName) {
       this.playerName = this.data.playerName;
-      this.selectedImage = this.data.playerImage || 'profile-1.png';
+      this.selectedImage = this.data.playerImage || 'beer.svg';
     }
   }
 

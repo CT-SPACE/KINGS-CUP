@@ -21,7 +21,7 @@ export class Game {
 public toJSON(){
     return {
       players: this.players,
-      playerImage: this.playerImages,
+      playerImages: this.playerImages,
       stack: this.stack,
       playedCards: this.playedCards,
       currentPlayer: this.currentPlayer

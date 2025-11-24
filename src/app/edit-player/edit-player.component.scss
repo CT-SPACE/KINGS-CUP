@@ -40,23 +40,39 @@
     }
   }
 
-  .profile-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-    gap: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
+.profile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 84px;
+  width: 100px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  
+  /* Scroll Snap */
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  
+  /* Optional: Scrollbar ausblenden für cleaner Look */
+  scrollbar-width: thin;
+  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+    &::-webkit-scrollbar-thumb {
+    background: rgba(246, 5, 234, 0.3);
     border-radius: 10px;
   }
+}
 
   .profile-option {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    border: 3px solid transparent;
+    border: 3px solid rgba(0, 0, 0, 0.04);
     object-fit: cover;
     transition: all 0.3s ease;
     
@@ -104,6 +120,12 @@
     color: rgb(38, 38, 38);
   }
 }
+button.fullscreen-btn{
+  border: 2px solid white !important;
+    background-color: rgb(236, 3, 197) !important;
+    color:rgba(255,255,255, 0.8) !important;
+    }
+
 
 // Mobile Responsive
 @media (max-width: 480px) {

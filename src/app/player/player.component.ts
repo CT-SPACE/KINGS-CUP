@@ -11,7 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PlayerComponent implements OnInit {
   @Input() name: string = '';
   @Input() playerActive: boolean = false;
-  @Input() playerImage: string = 'profile-1.png'; // ✅ NEU hinzugefügt
+  @Input() playerImage: string = 'beer.svg'; // ✅ NEU hinzugefügt
   @Input() playerIndex: number = 0; // ✅ NEU hinzugefügt
   @Output() playerClicked = new EventEmitter<number>(); // ✅ NEU hinzugefügt
 
