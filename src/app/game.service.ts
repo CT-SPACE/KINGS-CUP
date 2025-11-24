@@ -17,78 +17,78 @@ export class GameService {
     {
       short: "A",
       task: "Alle trinken gleichzeitig, reihum darf man erst aufhören",
-	moodpic: "waterfall"
+	title: "waterfall"
     },
     {
 
       short: "2",
       task: "Wähle jemanden, der trinken muss",
-	moodpic: "you"
+	title: "You"
     },
     {
 
       short: "3",
       task: "Du trinkst selbst",
-	moodpic: "me"
+	title: "Me"
     },
     {
 
       short: "4",
       task: "Alle berühren den Boden mit der Hand, Letzter trinkt",
-	moodpic: "ground"
+	title: "Ground"
     },
     {
 
       short: "5",
       task: "Alle Männer trinken",
-	moodpic: "boys"
+	title: "Dudes"
     },
 
     {
       short: "6",
       task: "Alle Frauen trinken",
-	moodpic: "girls"
+	title: "Girls"
     },
 
     {
       short: "7",
       task: "Hand hoch! Letzter trinkt",
-	moodpic: "sky"
+	title: "Sky"
     },
 
     {
       short: "8",
       task: "Wähle jemanden – ihr trinkt ab jetzt immer gemeinsam",
-	moodpic: "drink mate"
+	title: "Drink mate"
     },
 
     {
       short: "9",
       task: "Sag ein Wort, reihum wird gereimt",
-	moodpic: "rhyme"
+	title: "Rhyme"
     },
-
     {
       short: "10",
       task: "Nenne eine Kategorie, reihum werden Beispiele genannt",
-	moodpic: "category"
+	title: "category"
     },
     {
       short: "J",
       task: "Erfinde eine Regel – wer sie bricht, trinkt",
-	moodpic: "newrule"
+	title: "New Rule"
     },
 
     {
       short: "D",
       task: "Stelle Fragen – wer antwortet, trinkt",
-	moodpic: "questionmaster"
+	title: "Questionmaster"
     },
 
     {
       short: "K",
-      task: "1.–3. Getränk in den Becher. 4. Trinkt den Mix!",
-	moodpic: "kings-cup"
+      task: "1.–3. König - Gib von deinen Getränk etwas in den Becher.",
+      task2: "4. Trink den Mix!",
+	title: "Kings Cup"
     }
 ]
 

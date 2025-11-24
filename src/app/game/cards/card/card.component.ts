@@ -18,7 +18,7 @@ export class CardComponent {
     short: '',
     task: '',
     taskIcon: '',
-    moodpic: '',
+    title: '',
     type: '', 
     typeIcon: '', 
     color: '',
