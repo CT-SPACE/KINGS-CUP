@@ -77,6 +77,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ::ng-deep .mat-mdc-dialog-container {
+  width: max-content !important;
+    margin: auto !important;  // ✅ Zentriert horizontal
+
+
   .mdc-dialog__surface {
     border-radius: 20px !important;
     background: linear-gradient(135deg, #f3e7f3 0%, #e1bee1 100%) !important;

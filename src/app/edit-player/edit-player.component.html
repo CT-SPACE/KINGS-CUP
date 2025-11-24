@@ -6,16 +6,16 @@
   <mat-dialog-content>
     <!-- Name Input -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Spieler Name</mat-label>
+      <mat-label>Player Name</mat-label>
       <input matInput 
              [(ngModel)]="playerName" 
-             placeholder="Name eingeben..."
+             placeholder="Choose Name..."
              maxlength="20">
     </mat-form-field>
 
     <!-- Profile Picture Selection -->
     <div class="profile-selection">
-      <h3>Profilbild auswählen:</h3>
+      <h3>Choose Profile image:</h3>
       <div class="profile-grid">
         <img *ngFor="let picture of allProfilePictures" 
              [src]="'assets/img/profile-pictures/' + picture"
