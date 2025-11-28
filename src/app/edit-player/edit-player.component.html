@@ -6,11 +6,11 @@
   <mat-dialog-content>
     <!-- Name Input -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Player Name</mat-label>
+      <mat-label>Player Name (max. 8 characters)</mat-label>
       <input matInput 
              [(ngModel)]="playerName" 
              placeholder="Choose Name..."
-             maxlength="20">
+             maxlength="8">
     </mat-form-field>
 
     <!-- Profile Picture Selection -->
@@ -26,16 +26,6 @@
       </div>
     </div>
 
-    <!-- Preview -->
-    <!-- <div class="player-preview">
-      <h4>Vorschau:</h4>
-      <div class="preview-player">
-        <img [src]="'assets/img/profile-pictures/' + selectedImage" 
-             class="preview-image" 
-             alt="Preview">
-        <span class="preview-name">{{ playerName || 'Spieler Name' }}</span>
-      </div>
-    </div> -->
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

@@ -24,21 +24,40 @@ cardAction = [
     { title: 'Dudes', description: 'All men drink.' },
     { title: 'Quizmaster', description: 'You are the Question Master. If someone answers a question from you, he has to drink' },
     { title: 'Never have i ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
-    { title: 'King\'s Cup', description: 'Pour some of your drink into the Cup. Who picks the last King drinks the cup.' },
+    { title: 'King\'s Cup', description: ' 1. - 3. King: Pour some of your drink into the Cup.' },
+    { title: 'King\'s Cup', description: '4. King: The King\'s Cup is yours. Drink it all!' },
+
+    
   ];
 
 title: string = "";
 description: string = "";
 @Input() card: string = '';
+ @Input() kingsDrawn: number = 0; 
 
 ngOnChanges():void{
   if(this.card){
-     console.log('current Card', this.card,'Current Card Type', this.card.split(/[_\.]/));
-  let cardNumber = +this.card.split(/[_\.]/)[1];
-  this.title = this.cardAction[cardNumber - 1].title;
-  this.description = this.cardAction[cardNumber - 1].description;
-  }
- 
-}
+     const parts = this.card.split(/[_\.]/);
+      const cardNumber = +parts[1];
 
+   if (cardNumber >= 1 && cardNumber <= 12) {
+      this.title = this.cardAction[cardNumber - 1].title;
+      this.description = this.cardAction[cardNumber - 1].description;
+      return;
+    }
+
+    // Spezielle Logik für König (13) mit kingsNumber
+    if (cardNumber === 13) {
+      this.title = this.cardAction[12].title;
+      if (this.kingsDrawn < 3) {
+        // 1.–3. König
+        this.description = this.cardAction[12].description;
+      } else {
+        // 4. König
+        this.description = this.cardAction[13].description;
+      }
+    }
+  }
+
+}
 }

@@ -15,7 +15,6 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameRuleComponent } from '../game-rule/game-rule.component';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore, getDoc } from '@angular/fire/firestore';
@@ -224,26 +223,15 @@ export class GameComponent implements OnInit {
     return ((index * 7) % 12) - 6;
   }
 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
-  //     autoFocus: 'dialog',
-  //   });
+  getKingsDrawn(): number {
+  const played = this.game?.playedCards ?? [];
+  return played.reduce((count, c) => {
+    const parts = String(c).split(/[_\.]/);
+    const num = +parts[1];
+    return count + (num === 13 ? 1 : 0);
+  }, 0);
+}
 
-  //   dialogRef.afterClosed().subscribe((name: string) => {
-  //     if (name && name.trim() !== '') { 
-  //       this.game?.players.push(name);
-  //       this.game?.playerImages.push('beer.svg'); 
-
-  //       if (this.game && this.game.players.length >= 2) {
-  //         if (this.gameId === '') {
-  //           this.saveNewGameToFirestore();
-  //         } else {
-  //           this.updateGameInFirestore();
-  //         }
-  //       }
-  //     }
-  //   });
-  // }
   /**
    * Mischt alle gespielten Karten neu und fügt sie dem Stapel hinzu
    */
@@ -274,12 +262,7 @@ export class GameComponent implements OnInit {
    * Startet ein komplett neues Spiel
    */
   startNewGame() {
-     const confirmed = confirm(
-
-      
-  );
-
-
+     const confirmed = confirm();
     if (confirmed)  {
       // Spieler behalten, aber neues Spiel
       const currentPlayers = this.game?.players || [];
@@ -296,17 +279,7 @@ export class GameComponent implements OnInit {
       }
    }
   }
-  
-  // editPlayer(playerId: number){
-  //   console.log('Edit player', playerId);
-  //   const dialogRef = this.dialog.open(this.editPlayerComponentRef);
-  //   dialogRef.afterClosed().subscribe((change: string) => {
-  //     console.log("received change:", change);
-  //   })
-  // }
 
-
-  // ✅ ERSETZT: Alte openDialog() durch neue Implementierung
   openDialog(): void {
     const dialogRef = this.dialog.open(this.editPlayerComponentRef, {
       width: '500px',
@@ -319,12 +292,6 @@ export class GameComponent implements OnInit {
       if (result && result.name) {
         // Spieler hinzufügen mit Bild
         this.game?.players.push(result.name);
-        
-        // // ✅ NEU: Player Images Array erweitern
-        // if (!this.game) {
-        //   this.game.playerImages = [];
-        // }
-
 
         if (!this.game?.playerImages) {
         this.game!.playerImages = [];

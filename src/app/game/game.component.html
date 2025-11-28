@@ -63,7 +63,7 @@
 </div>
 </div>
     <div class="pin-rule">
-<app-game-rule [card]="currentCard"></app-game-rule>
+<app-game-rule [card]="currentCard" [kingsDrawn]="getKingsDrawn()"></app-game-rule>
     <button mat-fab color="--mdc-fab-container-color"
         class="addPerson" (click)="openDialog()"> <img src="assets/img/beer_empty.svg" alt="Add Player" class="addBeer">
         <mat-icon class="addIcon">add</mat-icon>
