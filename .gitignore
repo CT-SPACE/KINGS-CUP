@@ -2,6 +2,8 @@
 
 # Compiled output
 /dist
+/dist_1u1
+/dist_da
 /tmp
 /out-tsc
 /bazel-out
